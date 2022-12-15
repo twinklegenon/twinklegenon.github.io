@@ -1,0 +1,2533 @@
+<!DOCTYPE HTML>
+<!--
+	Dimension by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>CPE 232 - Managing Enterprise Servers</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+				<!-- Header -->
+					<header id="header">
+						<div class="">
+					 
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h1>Final Requirement in </h1>
+								<h1>CPE 232 - Managing Enterprise Servers</h1>
+								<p>A compilation of all hands on-activities and examinations </p>
+							</div>
+						</div>
+						<nav>
+							<ul>
+								<li><a href="#hoa0">HOA 0</a></li>
+								<li><a href="#hoa2">HOA 2</a></li>
+								<li><a href="#hoa3">HOA 3</a></li>
+								<li><a href="#hoa4">HOA 4</a></li>
+								<li><a href="#hoa5">HOA 5</a></li>
+								<li><a href="#prelim"> Prelim Exam </a></li>				
+							</ul>
+							<ul>
+								<li><a href="#hoa6">HOA 6</a></li>
+								<li><a href="#hoa7">HOA 7</a></li>
+								<li><a href="#hoa8">HOA 8</a></li>
+								<li><a href="#hoa9">HOA 9</a></li>
+								<li><a href="#hoa10">HOA 10</a></li>
+								<li><a href="#midterm">Midterm Exam</a></li>				
+							</ul>
+							<ul>
+							<li><a href="#hoa11">HOA 11</a></li>
+							<li><a href="#hoa12">HOA 12</a></li>
+							<li><a href="#hoa13">HOA 13</a></li>
+							<li><a href="#hoa14">HOA 14</a></li>
+							<li><a href="#hoa15">HOA 15</a></li>
+							<li><a href="#final"> Final Exam </a></li>
+						    </ul>
+						</ul>
+						<ul>
+						<li><a href="#ref">Reflections & Learnings </a></li>
+						<li><a href="#about">About Me</a></li>
+						<li><a href="#contact">Contact Me</a></li>
+						<li><a href="https://drive.google.com/drive/folders/14iXcqKyxxGuK0Q8y5QZwfsvNiHUmmop7?usp=share_link"> All Documentations </a></li>
+						
+						</ul>
+
+						</nav>
+					</header>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Hands-On-Activity-0 -->
+							<article id="hoa0">
+								<h2 class="major">Creating Virtual Machines</h2>
+								<span class="image main"><img src="images/pic07.png" alt="" /></span>
+								<h3 class="major">Objectives:</h3>
+								<p>  1.1. Create and configure Virtual Machines in Microsoft Azure or VirtualBox </p>
+								<p> 1.2. Set-up a Virtual Network and Test Connectivity of VMs</p>
+								<h3 class="major">Steps: </h3>
+								<h3>Task 1 - Do the following on servers </h3>
+								<p> <b>Step 1.1:</b>  Assume that you have a prior knowledge in cloning and creating snapshots in a virtual machine</p>
+								<p> <b>Step 1.2:</b>  Change the hostname of server/s by using the command below:</p>
+								<pre><code>$ sudo nano /etc/hostname</code></pre>
+								<p> <b>Explanation:</b>  Editing the host name is essential to identify every server you are going to deploy for services. It is used to distinguish the cloned servers by their functions and categorized them as compute or the controller node. </p>
+								<p> <b>Step 1.3:</b>  Edit the hosts using the command below: </p>
+								<pre><code>$ sudo nano /etc/hosts</code></pre>
+								<p> <b>Explanation:</b> Editing the hosts file to rename the hostname for the localhost ip address 127.0.0.1.</p>
+								<h3>Task 2 - Configure SSH on servers </h3>
+                                <p> <b>Step 2.1:</b> Update and Upgrade the packages on every server to prevent other errors and problems. Just issue the command below:</p>
+								<pre><code>$ sudo apt-get update && upgrade </code></pre>
+								<p> <b>Explanation:</b> The command <code>sudo apt-get update</code>  will figure out what is the latest version of each package and dependency. While the command <code>sudo apt-get upgrade </code> will downloads and installs the updates for each outdated package and dependency on the system. Thus, avoiding future problems.</p>
+								<p> <b> Step 2.2: </b> Install the SSH server using the command below</p>
+								<pre><code>$ sudo apt install openssh-server</code></pre>
+								<p> <b>Explanation:</b> The <code>sudo apt install openssh-server</code> will install the (OpenSSH Daemon or server) daemon program for ssh client. It is a free and open source ssh server. SSH is preferred than Telnet because it provides secure encrypted communications between two hosts over an insecure network. </p>
+								<p> <b> Step 2.3: </b>Verify if the SSH service has started by issuing the following commands:</p>
+								<pre><code>$ sudo service ssh start</code></pre>
+								<pre><code>$ sudo systemctl status ssh</code></pre>
+                                <p> <b>Explanation:</b> The <code>sudo service ssh start</code> will force the service to start and run on the system. The <code>sudo systemctl status ssh </code> is used to verify the operation and troubleshoot the service if there are any problem occurs. </p>
+								<p> <b> Step 2.4: </b>Configure the firewall to all port 22 by issuing the following commands: </p>
+                                <pre><code>$ sudo ufw allow ssh</code></pre>
+								<pre><code>$ sudo ufw enable</code></pre>
+								<pre><code>$ sudo ufw status </code></pre>
+								<p> <b>Explanation:</b> The commands <code>sudo  ufw allow ssh</code> will create firewall rules to allow all connections on port 22, which is the port that the SSH daemon listens on by default. The commands <code>sudo  ufw enable</code> will enable the firewall on the system startup meaning it will run automatically whenever the user used the server. The <code>sudo ufw status</code> command is used to verify the operation of the firewall.</p>
+								<h3>Task 3 - Verify network settings on servers </h3>
+                                <p> <b>Step 3.1: </b> Record the ip address of the servers and ping the servers using the commands below</p>
+                                <pre><code>$ ifconfig</code></pre>
+								<pre><code>$ ping <i>ip address</i></code></pre>    
+								<p> <b>Explanation: </b> The <code>ifconfig </code> command is used to view and change the configuration of the network interfaces on your system. The <code>ping</code> command is used to verify connection where it sends packet of data to a specific IP address on a network, In this case, replace the ip address part of the ip address of the server you want to ping.  </p>  
+								<h3>Task 4 -  Verify SSH connectivity between servers</h3>
+                                <p> <b>Step 4.1: </b> To verify SSH connectivity, on the local machine issue the following command:</p>
+                                <pre><code>$ ssh <i>username@ipaddress</i></code></pre>
+							    <p>After issuing the command above, enter the password of the server when prompted. To verify that you are inside the server where SSH into, the user should be in this format <code><i>user@server1</i></code> After verifying the ssh connection, logout on the server where you SSH into, user the command <code>control + D</code></p>
+								<p><b>Step 4.2</b> Issue the <code> sudo nano /etc/hosts</code> to edit the hosts on the local machine. Provide the ip addresses of the servers and their hostname. </p>
+								<span class="image main"><img src="images/pic26.png" alt="" /></span>
+								<p> <b> Step 4.3: </b>Verify that you can do SSH command using the hostname instead of typing the IP address</p>
+								<pre><code>$ ssh <i> username@hostname </i></code></pre>
+								<p> <b>NOTE: </b>The user should be able to ssh to another server using the hostname instead of the ip address because ip address is very hard to remember compared to the hostname of the server.  </p>
+								<li><a href="https://drive.google.com/file/d/1nb7LuMHnHcT4INVXtk9jyqgxqGHvNeZL/view?usp=share_link" class="button primary">Visit Hands-On Activity 0</a></li>
+							</article>
+							
+
+						<!-- Hands-On-Activity-2 -->
+							<article id="hoa2">
+								<h2 class="major">SSH Key-Based Authentication </h2>
+								<h2 class="major"> and GIT Setup</h2>
+								<span class="image main"><img src="images/pic08.png" alt="" /></span>
+								<h3 class="major">Objectives:</h3>
+								<p>1.1 Configure remote and local machine to connect via SSH using a KEY instead
+									of using a password </p>
+								<p>1.2 Create a public key and private key</p>
+								<p>1.3 Verify connectivity</p>
+								<p>1.4Setup Git Repository using local and remote repositories</p>
+								<p>1.5Configure and Run ad hoc commands from local machine to remote servers</p>
+                                <h3 class="major">Steps: </h3>
+								<h3>Task 1 - Create an SSH Key Pair for User Authentication </h3>
+                                <p> <b> Step 1.1: </b> To Generate a key pair is to run the command below without arguments. It will prompt for the file in which to store keys. The SSH keys are store in <code> .ssh  </code> directory. </code></p>
+								<pre><code>$ ssh-keygen</code></pre>
+								<p>The<code>ssh-keygen</code> command is used to generate a public key pair for use when authenticating with a remote server.</p>
+								<p> <b> Step 1.2: </b> Generate a SSH Key Pair with a Larger Number of Bits such as 4096 Bits, issue the command below: </p>
+                                <pre><code> $ ssh key-gen -t rsa -b 4096</code></pre>
+                                <p><b>Explanation:</b> The algorithm is selected using the<code>-t</code>option and key size using the<code>-b</code>option. When you are asked for a passphrase when generating SSH key pair, just press enter. The passphrase is used for encrypting the key, so it cannot be used even the private key file is obtained. </p>
+								<p> <b> Step 1.3: </b> Verify the created SSH Key, issue the command below: </p>
+                                <pre><code> $ ls -la .ssh</code></pre>
+                                <p><b>Explanation:</b> After entering the command above, it should show or output the <code>.ssh</code> directory containing a pair of keys. For example, <code>id_rsa.pub</code> and <code>id_rsa</code></p>
+								<h3>Task 2 - Copying the Public Key to the Remote Servers</h3>
+								<p><b>Step 2.1:</b>To use the public key authentication, the publick key must be copied to a server and be installed in an <code><i>authorized_keys</i></code> This can be done using the command:</p> 
+								<pre><code>$ ssh-copy-id</code></pre>
+								<pre><code>$ ssh-copy-id -i ~/.ssh/id_rsa_<i>user@host</i></code></pre>
+                                <p> <b> Explanation:</b> Once the commands are executed above where the public key has been configured on the server, the server will now allow any connecting user that has the private key to log in. During the login process, the client proves possesion of the private key by digitally signing the key exhange.</p>
+								<p><b>Step 2.2:</b> Verify that you can SSH with Servers</p>
+								<pre><code>$ ssh <i>username@ipaddress</i></code></pre>
+								
+								<h3>Task 3 - Set up the Git Repository</h3>
+								<p><b>Step 3.1:</b>Verify the version of your git using the command:</p>
+								<pre><code>$ which git</code></pre>
+								<pre><code>$ git --version</code></pre>
+								<p>When you have executed the command above and there is a git displayed, then you don't need to install git. Otherwise, to install git use the command <code>sudo apt install git</code> The directory of git is usually installed in this location: <code>user/bin/git</code></code>. Issue the command <code> git --version</code> to check if the device has the latest version of git installed.</p>
+								
+								
+								<h4> Creating and Setting up Github account</h4>
+								<p><b>Step 3.2:</b> Use the browser and go to <code>www.github.com</code>. Sign up in case you don't have an account yet. Log in to your GitHub account. Create a new repository and name it as <code>CPE232_yourname</code>. Always add a <code>README</code> file and click the <code>Create Repository</code> </p> 
+								<p><b>Step 3.3:</b> Create a new SSH Key on Github. Go to your profile's setting and click <code>SSH and GPG keys</code>. If there is an existing key, make sure to delete it. To create a new SSH Keys, click <code> New SSH Key</code>. Write <code> CPE232 key</code> as the the title of the key.<p>
+								<span class="image main"><img src="images/pic27.png" alt="" /></span>
+								<p><b>Step 3.4:</b> On the local machine's terminal, issue the command: <code>$cat .ssh/id_rsa.pub</code>. After executing the command above, copy the Public Key. Paste it on the <code>Github Key</code> and press <code>Add SSH key</code></p>
+								<span class="image main"><img src="images/pic28.png" alt="" /></span>
+								<p><b>Step 3.5:</b> Clone the repository that you created in Github. In doing this, you need to get the link from Github. Browse to your repository and click on the Code drop down menu. Select <code>SSH</code> and copy the link.</p>
+								<span class="image main"><img src="images/pic29.png" alt="" /></span>
+							    <p><b>Step 3.6:</b> Issue the command <code>git clone </code> followed by the copied link. For example:</p>
+								<pre><code>$ git clone <i>git@github.com:twinklegenon/CPE232_HOA2_Genon.git</i></code></pre>
+								<p><b>Explanation: </b> Take note that when you are prompted after executing the commands above, just type yes and press enter. Cloning the repository is important because you are copying the repository on your local machine from Github online so you can work online and just backup the files on Github online when you are done. </p> 
+								<p><b>Step 3.7:</b> In verifying that you have cloned the Github repository successfully, issue the command <code>ls</code> to list the files. Observe that you now have the repository on your local machine, Use the <code>cd</code> command to go to the directory or repository and <code>ls </code> to check if you can see the <code>README</code>file.</code></p>
+								<p><b>Step 3.8:</b>Use the following commands to personalize your git.</p>
+								<pre><code>git config --global user.name <i>"Your Name"</i></code></pre>
+								<pre><code>git config --global user.email <i>"yourname@email.com"</i></code></pre>
+								<p>Verify that you have personalized the config file using the command <code>cat ~/.gitconfig</code>.</p>
+								
+
+								<p><b>Step 3.9:</b>Edit the <code>README.file</code> using <code>nano</code>command. Provide any information on the markdown file pertaining to the repository you created. Make sure to save the file.</p>
+								<p><b>Step 3.10:</b>To display the state of the working directory and the staging area, use the following command: </p>
+								<pre><code>$ git status</code></pre>
+								<p><b>Explanation:</b> The command <code>git status</code> shows which changes have been staged, which haven't and which files aren't being tracked by Git. </p>
+								<p><b>Step 3.11:</b>After showing the changes and current directory, add the file into the staging area and use the command:</p>
+                                <pre><code>git add <i>README.md</i></code></pre>	
+                                <p>The <code>git add</code> command adds the changes from the working directory to staging area. It tells the Git that you want to include updates to a particular file in the next commit. </p>
+								<p><b>Step 3.12:</b>To create a snapshot of the staged changes along the timeline of the Git projects history, use the command below:</p>
+								<pre><code>git commit -m <i>"your message"</i></code></pre>
+								<p>The <code>git commit </code> command is used to save the changes you have committed on the local repository. The <code> -m</code> options means the <code>"message"</code> and it is used as a desciption about the files and directories on your Github repository. </p>
+								<p><b>Step 3.13:</b>To upload the local repository content to Github repository online, use the command below:</p>
+                                <pre><code>git push <i>(remote) (branch)</i></code></pre>
+								<pre><code>git push origin main</code></pre>
+                                <p>The <code>git push</code> command is used to upload the local repository content to a remote repository. This is how you transfer commits from you local repository to Github online. </p>
+								<p><b>Step 3.14:</b>On your Github account, verify the changes that have been made to <code>README.md</code>file. </p>
+
+								<li><a href="https://drive.google.com/file/d/1dE4qWJkHyPj9ND3Onl00iGsP5iwihOZO/view?usp=share_link" class="button primary">Visit Hands-On Activity 2</a></li>
+								<br> </br>
+								<li><a href="https://github.com/twinklegenon/CPE232_HOA2_Genon" class="button primary">Visit Github link for Hands-On Activity 2</a></li>
+							
+
+					
+							</article>
+
+						<!-- Hands-On-Activity-3 -->
+							<article id="hoa3">
+								<h2 class="major"> Install SSH server on CentOS </h2>
+								<h2 class="major"> or RHEL 8</h2>
+								<span class="image main"><img src="images/pic09.png" alt="" /></span>
+								<h3 class="major">Objectives:</h3>
+								<p>1.1Install Community Enterprise OS or Red Hat Linux OS</p>
+								<p>1.2Configure remote SSH connection from remote computer to CentOS/RHEL-8</p>
+								<h3 class="major">Steps: </h3>
+								<h3>Task 1 - Downlaod the CentOS or RHEL-8 image (CentOS in this case)</h3>
+								<p><b>Step 1.1:</b> Downlaod the image of the CentOS here: <a href="http://mirror.rise.ph/centos/7.9.2009/isos/x86_64/" >http://mirror.rise.ph/centos/7.9.2009/isos/x86_64/</a> </p>
+								<p><b>Step 1.2:</b> Create a VM machine with 2 GB RAM and 20 GB HD </p>
+								<p><b>Step 1.3:</b> Install the downloaded image</p>
+								<h3>Task 2 - Install the SSH server package <i>openssh</i></h3>
+                                <p><b>Step 2.1</b> Update and Upgrade the packages on the CentOS</p>
+								<pre><code>$ sudo yum update </code></pre>
+								<pre><code>$ sudo yum upgrade </code></pre>
+								<p><b>Explanation: </b> The <code>yum</code> on the command is a software package management utility used in many Linux distributions. including Fedora and CentOS. <code>yum</code> is a front-end for the RPM package manager, meaning that it manages packages in the <code>.rpm</code>file format.</p>
+								<p><b>Step 2.2</b> Install the dnf</p>
+								<pre><code>$ sudo yum install dnf</code></pre>
+								<p><b>Explanation: </b><code>dnf</code> stands for Dandified YUM is a software package manager for RPM-based Linux distributions. It is used to install, update and remove packages in the CentOS operating system. It is the default package manager of CentOS8.</p>
+								<p><b>Step 2.3</b> Install the ssh server package <i>openssh</i> by using the <i>dnf</i> command:</p>
+								<pre><code>$ dnf install openssh-server</code></pre>
+                                <p><b>Explanation:</b> <code>OpenSSH</code> provides a server daemon and client to facilitate secure, encrypted remote control and file transfer operations, effectively replacing the legacy tools. The <code>OpenSSH</code> server component, sshd, listens continuously for client connections from any of the client tools.</p>
+								<p><b>Step 2.4:</b> Start the <i>sshd</i> daemon and set to start after reboot</p>
+								<pre><code>$ systemctl start sshd</code></pre>
+								<pre><code>$ systemctl enable sshd</code></pre>
+								<p><b>Explanation: </b> The <code>systemctl</code> command manages both system and service configurations, enabling administrators to manage the OS and control the status of services. Further, <code>systemctl</code> is useful for troubleshooting and basicc performance tuning.</p>
+								<p><b>Step 2.5:</b> Confirm that the sshd daemon is up and running: </p>
+								<pre><code>$ systemctl status sshd</code></pre>
+								<p><b>Explanation: </b>The <code>systemctl status sshd</code> command is used to verify the operation if the sshd is running successfully on the system. The <code>systemct status</code> part of the command is used for verification and troubleshooting services.</p>
+								<p><b>Step 2.6: Open the SSH port 22 to allow incoming traffic: </b></p>
+								<pre><code>$ firewall-cmd --zone=public --permanent --add-service=ssh</code></pre>
+								<pre><code>$ firewall-cmd --reload</code></pre>
+								<p><b>Explanation:</b> The <code>firewall-cmd</code> is the command line client of the firewalld daemon. It provides an interface to manage the runtime and permanent configurations. In simple words, the commands that are mentioned above is used to limit SSH access by IP addresses using firewall.  </p>
+								<p><b>Step 2.7:</b> Locate the ssh server man config file <code>/etc/ssh/sshd_config</code>and perform custom configuration. Every time you make any change to the <code>/etc/ssh/sshd-config</code> configuration file reload the <i>sshd</i> service to apply changes.</p>
+								<pre><code>$ systemctl reload sshd</code></pre>
+								<h3>Task 3 - Copy the Public Key to CentOS</h3>
+								<p><b>Step 3.1:</b> Make sure that <i>ssh </i> is installed on the local machine</p>
+								<pre><code>$ yum -y install openssh-server openssh-clients</code></pre>
+								<p><b>Explanation: </b> The command above are used to install <code>openssh-server</code> and <code>openssh-clients</code> on the CentOS server. The <code>OpenSSH-clients</code> always initiates the setup of the secure connection, and the <code>OpenSSH-server</code> listens for incoming connection requests (usually on TCP port 22 on the host system) and responds to them </p>
+								<p><b>Step 3.2:</b> Using the command <code>ssh-copy-id</code>, connect your local machine to CentOS</p>
+								<pre><code>$ ssh-copy-id</code></pre>
+								<p><b>Step 3.3:</b> On CentOS, verify that you have the <code>authorized_keys</code></p>
+								<h3>Task 4 - Verify ssh remote connection</h3>
+								<p><b>Step 4.1:</b> Using the local machine, connect to CentOS using ssh. Show evidence that you are connected. </p>
+								<pre><code>$ ifconfig</code></pre>
+								<pre><code>$ ssh-copy-id <i>username@ipaddress</i></code></pre>
+                                <p><b>Explanation:</b> The <code>ifconfig</code> command is used to assign an address to a network interface and to configure or display the current network interface configuration information. While the command <code>ssh-copy-id</code> installs an SSH key on a server as an authorized key. The purpose of this is to provide access without requiring a password for each login.</p>
+								<li><a href="https://drive.google.com/file/d/1jXu56l4d8RzEAMrQBS0ga0hotFXoQKQT/view?usp=share_link" class="button primary">Visit Hands-On Activity 3</a></li>
+							</article>
+                        
+						<!-- Hands-On-Activity-4 -->
+						<article id="hoa4">
+							<h2 class="major"> Ansible Basics</h2>
+							<span class="image main"><img src="images/pic10.png" alt="" /></span>
+							<h3 class="major">Objectives:</h3>
+							<p>1.1Use commands that makes changes to remote machines</p>
+                            <p>1.2Use playbook in automating ansible commands</p>
+							<h3 class="major">Steps: </h3>
+							<h3>Task 1 - Run elevated ad hoc commands</h3>
+							<p><b>Step 1.1:</b> Try the command below: </p>
+							<pre><code>$ ansible all -m apt -a update_cache=true</code></pre>
+							<p><b>Explanation: </b>We use the command <code>sudo apt update</code> when we want to download package information from all configured resources. The sources often defined in <code>/etc/apt/sources.list</code> file and other files located in <code>/etc/apt/sources.list.d/</code> directory. So, when you run update command, it downloads the package information from the Internet. It is useful to get info on an updated version of packages of their dependencies. We can only run an update command in a remote machine.</p>
+                            <p><b>Step 1.2:</b> Try editing the command and add something that would elevate the privilege. Issue the command: </p> 
+							<pre><code>$ ansible all -m apt -a update_cache=true --become --ask-become-pass</code></pre>
+							<p>After entering the command above, enter the sudo password when you are prompted. The output now will be a success. </p>
+							<p><b>Explanation:</b> The <code>update_cache=true</code> command is the same thing as running the command <code>sudo apt update</code>. The <code>--become</code> command elevate the privileges and the <code>--ask-become-pass</code> asks for the password. </p>
+							<p><b>Step 1.3:</b> Let's try to install VIM using ansible</p>
+							<pre><code>$ ansible all -m apt -a name=vim-nox --become --ask-become-pass</code></pre> 
+							<p><b>Explanation: </b> The <code>VIM</code> which is an almost compatible version of the UNIX editor Vi. After entering the command above, the command execution will take some time after typing the password because the local machine instructed the remote servers to install the package <code>VIM</code>.</p>
+							<p><b>Step 1.4:</b> Verify that you have installed the package in the remote servers. Issue the commands:</p>
+							<pre><code>$ which vim</code></pre>
+                            <pre><code>$ apt search vim-nox</code></pre>
+							<p><b>Step 1.5:</b> Check the logs in the servers using the following commands: </p>
+							<pre><code>$ cd /var/log</code></pre>
+							<p>After changing the directory above, issue the command <code>ls</code>, go to the folder <code>apt</code> and open <code>history.log</code><p>
+							<p><b>Step 1.6:</b> This time, try to install a package called <code>snapd</code></p>
+							<pre><code>$ ansible all -m apt -a name=snapd --become --ask-become-pass</code></pre>
+							<p><b>Explanation:</b> The <code>Snapd</code> allows upstream software developers to distribute their applications directly to users. <code>Snapd</code> is pre-installed in Ubuntu system. However, our goal is to create a command that checks for the latest installation package. </p>
+							<p><b>Step 1.7:</b> Try the command:</p>
+							<pre><code>$ ansible all -m apt -a "name=snapd state=latest" --become --ask-become-pass</code></pre>
+							<p><b>Explanation:</b> The <code>state=latest</code> installs the latest installation package for <code>Snapd</code></p>
+							<p><b>Step 1.8</b> Make sure to  commit all changes to Github</p>
+							<pre><code>$ git status</code></pre>
+							<pre><code>$ git add</code></pre>
+							<pre><code>$ git commit</code></pre>
+							<pre><code>$ git push origin main</code></pre>
+							<h3>Task 2- Writing our First Playbook</h3>
+                            <p><b>Introduction:</b> With ad hoc commands, we can simplify the administration of remote
+								servers. For example, we can install updates, packages, and applications,
+								etc. However, the real strength of ansible comes from its playbooks. When
+								we write a playbook, we can define the state that we want our servers to be
+								in and the place or commands that ansible will carry out to bring to that
+								state. You can use an editor to create a playbook.</p>
+							<p><b>Step 2.1: </b> Create a playbook file called <code>install_apache.yml</code>. Type the following inside the playbook file.</p>
+                            <pre><code>$ nano install_apache.yml</code></pre>
+							<pre><code>---
+- hosts: all
+  become: true
+  tasks:
+
+- name: install apache2 package
+  apt:
+    name: apache2</code></pre>
+							<p><b>Step 2.2: </b> Run the yml file using the command: </p>
+							<pre><code>$ ansible-playbook --ask-become-pass install_apache.yml</code></pre>
+                            <p><b>Step 2.3: </b> To verify that apache2 was installed automatically in the remote servers, go to the web browsers on each server and type its IP address. You should see something like this:</p>
+							<span class="image main"><img src="images/pic30.png" alt="" /></span>
+							<p><b>Step 2.4:</b> Edit the <code>install_apache.yml</code> and change the name of the package to any name that will not be recognized. Run the playbook file and observe the output.</p>
+                            <p><b>Step 2.5:</b> We are going to put additional tasks to our playbook. Edit the <code>install_apache.yml</code>. We are going to add an additional command which is the <code>update_cache</code>. This command updates existing package-indexes on a supporting distro but not upgrading installed-packages (utilities) that were being installed. Run the playbook after encoding the codes.  </p>
+							<pre><code></code>---
+- hosts: all
+  become: true
+  tasks:
+
+  - name: update repository package-index
+    apt: 
+      update_cache: yes
+  - name: install apache2 package
+    apt: 
+       name: apache2</code></pre>
+                            <p><b>Step 2.6:</b> Edit again the <code>install_apache.yml</code> This time, we are going to add PHP support for the apache package we installed earlier. Run the playbook and describe the output.</p>
+							<pre><code>---
+- hosts: all
+  become: true 
+  tasks:
+
+  - name: update repository index 
+    apt:
+	   update_cache: yes
+  
+  - name: install apache2 package
+    apt: 
+	  name: apache2
+
+  - name: add PHP support for apache 
+    apt:
+	  name: libapache2-mod-php</code></pre>
+                            <p><b>Step 2.7:</b> Sync the repository from local repository to Github online</p>
+							<pre><code>$ git status</code></pre>
+							<pre><code>$ git add</code></pre>
+							<pre><code>$ git commit -m <i>yourmessage</i></code></pre>
+							<pre><code>$ git push origin main</code></pre>
+							<li><a href="https://drive.google.com/file/d/1UYnUS46JWNzyqVtBxqFJ6zdfuVDA5JMX/view?usp=share_link" class="button primary">Visit Hands-On Activity 4</a></li>
+							<br> </br>
+							<li><a href="https://github.com/twinklegenon/CPE232_HOA4_Genon" class="button primary">Visit Github link for Hands-On Activity 4</a></li>
+						</article>	
+
+						<!-- Hands-On-Activity-5 -->
+						<article id="hoa5">
+							<h2 class="major">Implement Ansible </h2>
+							<h2 class="major">roles in playbooks</h2>
+							<span class="image main"><img src="images/pic11.png" alt="" /></span>
+							<h3 class="major">Objectives:</h3>
+							<p>1.1 Use when command in playbook for different OS distributions</p>
+                            <p>1.2 Apply refactoring techniques in cleaning up the playbook codes</p>
+							<h3 class="major">Steps: </h3>
+							<h3>Task 1 - Use when command for different distributions</h3>
+							<p><b>Step 1.1</b> Issue the command <code>git pull</code>. When prompted, enter the correct passphrase or password. </p>
+                            <p><b>Explanation: </b>The <code>git pull</code>command is used to fetch and download content from a remote repository and immediately update the local repository to match that content. Merging remote upstream changes into your local repository is a common task in Git-based collaboration work flows.</p>
+							<p><b>Step 1.2:</b> Edit the <code>inventory</code> file and add the IP address of the CentOS VM. Execute the playbook file again <code>ansible-playbook --ask-become-pass install_apache.yml</code>. The output is not successful in the CentOS Vm because CentOS does not support <code>apt</code>as the package manager. The default package manager for CentOS is <code>"yum"</code></p>
+							<p><b>Step 1.3:</b>Edit the <code>install_apache.yml</code>and insert the lines shown below. Run the playbok file again and Observe the output.</p>
+							<pre><code>---
+- hosts: all
+  become: true
+  tasks:
+
+  - name: update repository index
+    apt:
+	  update_cache: yes
+	when: ansible_distribution == "Ubuntu"
+
+  - name: install apache2 package
+    apt:
+	  name: apache2 
+	when: ansible_distribution == "Ubuntu"
+
+  - name: add PHP support for apache
+    apt:
+	  name: libapache2-mod-php
+	when: ansible_distribution == "Ubuntu"</code></pre>
+							<p><b>Step 1.4: </b> Edit the <code>install_apache.yml</code> file and insert the lines shown below. Run the playbook file and describe the result.</p>
+							<pre><code>---
+- hosts: all
+  become: true
+  tasks:
+
+  - name: update repository index
+    apt: 
+	  update_cache: yes
+	when: ansible_distribution == "Ubuntu"
+
+  - name: install apache2 package
+    apt: 
+	  name: apache2
+	  state: latest
+	when: ansible_distribution == "Ubuntu"
+ 
+  - name: add PHP support for apache
+    apt:
+	  name: libapache2-mod-php
+	  state: latest
+	when: ansible_distribution == "Ubuntu"
+
+  - name: update repository index
+    dnf:
+	  update_cache: yes
+	when: ansible_distribution == "CentOS"
+
+  - name: install apache2 package
+    dnf: 
+	  name: httpd
+	  state: latest
+	when: ansible_distribution == "CentOS"
+
+  - name: add PHP support for apache 
+    dnf:
+	  name: PHP
+	  state: latest
+	when: ansible_distribution == "CentOS"</code></pre>
+							<p><b>Step 1.5:</b> To verify the installations, go to CentOS VM and type its IP address on the browser. If it is not sucessfull because <code>httpd</code> and <code>apache HTTP server</code> is not yet active. </p>
+							<li><a href="https://drive.google.com/file/d/1tIXQTYvubCNQENPjqHEfku-SDTU8mlvg/view?usp=share_link" class="button primary">Visit Hands-On Activity 5</a></li>
+                            <p><b>Step 1.6:</b> To activate, go to the CentOS VM terminal and enter the following: </p>
+							<pre><code>$ sudo systemctl status httpd</code></pre>
+							<p><b>Step 1.7: </b> Issue the following command to start the service: </p>
+							<pre><code>$ sudo systemctl start httpd</code></pre>
+							<pre><code>$ sudo firewall-cmd --add-port=80/tcp</code></pre> 
+							<p>The result should be success.</p>
+							<p><b>Step 1.8</b> To verify the service is already running, go to CentOS VM and type its IP address on the browser. The output  should be: </p>
+                            <span class="image main"><img src="images/pic31.png" alt="" /></span>
+ 							<h3>Task 2 - Refactoring playbook</h3>
+							<p><b>Introduction: </b> This time, we want to make sure that our playbook is efficient and that the codes are easier to read. This will also makes run ansible more quickly if it has to execute fewer tasks to do the same thing.</p>
+							<p><b>Step 2.1: Edit the <code>install_apache.yml</code>. Currently, we have three tasks targeting our Ubuntu machines and 3 tasks targeting our CentOS machine. Now, we are going to consolidate two plays that install packages as shown below. Run the playbook and observe the output.</b></p>
+							<pre><code>---
+- hosts: all
+  become: true 
+  tasks:
+
+  - name: update repository index Ubuntu
+    apt: 
+	  update_cache: yes
+	when: ansible_distribution == "Ubuntu"
+
+  - name: install apache2 and php packages for Ubuntu
+    apt: 
+	  name: 
+	    - apache2
+		- libapache2-mod-php
+	  state: latest
+	when: ansible_distribution == "Ubuntu"
+
+	- name: update repository for CentOS
+	  dnf: 
+	    update_cache: yes
+	  when: ansible_distribution == "CentOS"
+
+	- name: install apache and php packages for CentOS
+	  dnf: 
+	    name: 
+		  - httpd
+		  - PHP
+		state: latest
+	  when: ansible_distribution == "CentOS"</code></pre>
+                            <p><b>Step 2.2:</b> Edit the <code>install_apache.yml</code> again. This time we can actually consolidated everything in just 2 plays. This can be done by removing the update repository play and putting the command <code>update_cache: yes</code> below the command <code>state: latest</code>. See below for reference. Run the playbook and observe the results.</p>
+							<pre><code>---
+- hosts: all
+  become: true
+  tasks:
+
+  - name: install apache2 and php packages for Ubuntu
+    apt: 
+	  name: 
+	    - apache2
+		- libapache2-mod-php
+	  state: latest
+	  update_cache: yes
+
+  - name: install apache and php packages for CentOS 
+    dnf:
+	  name: 
+	    - httpd
+		- php 
+	  state: latest
+	  update_cache: yes
+	when: ansible_distribution == "Ubuntu"</code></pre>
+							<p><b>Step 2.3: </b> Finally, we can consolidate these 2 plays in just 1 play. This can be done by declaring variables that will represent the packages that we want to install. Basically, the <code>apache_package</code> and <code>php_package</code> are variables. The names are arbitrary, which means we can choose different names. We also take out the line "<code>when: ansible_distribution</code>". Edit the playbook <code>install_apache.yml</code> again and make sure to follow the codes below and make sure to save the file and exit. Run the playbook file.</p>
+							<pre><code>---
+- hosts: all
+  become: true
+  tasks: 
+
+  - name: install apache and php 
+    apt: 
+	  name: 
+	    - "{{ apache_package }}"
+		- "{{ php_package }}"
+	  state: latest
+	  update_cache: yes
+							</code></pre>
+							<p>Unfortunately, the task above was not successful. It is because we need to change something in the <code>inventory</code> file so that the variables we declared will be in place. Edit the <code>inventory</code> file and follow the below configuration: </p>
+							<pre><code>192.168.56.120 apache_package=apache2 php_package=libapache2-mod-php
+192.168.56.121 apache_package=apache2 php_package=libapache2-mod-php
+192.168.56.122 apache_package=httpd php_package=php</code></pre>
+							<p><b>Step 2.4: </b> Replace the <code>apt</code> with <code>package</code>. <code>Package</code> is a module in ansible that is generic, which is going to use whenever package manager the underlying host or the target server uses. Just remember that for Ubuntu we use th e <code>apt</code> while in CentOS uses the <code>dnf</code>. Make sure to save the file and run the playbook. </p>
+							<pre><code>---
+- hosts: all
+  become: true
+  tasks:
+
+  - name: install apache2 and php 
+    package:
+	  name: 
+	    - "{{ apache_package }}"
+		- "{{ php_package }}"
+	  state: latest
+	  update_cache: yes 
+
+							</code></pre>
+							<br> </br>
+							<li><a href="https://github.com/twinklegenon/CPE232_HOA5_Genon" class="button primary">Visit Github link for Hands-On Activity 5</a></li>
+						</article>	
+
+						<!-- Prelim Examination -->
+						<article id="prelim">
+							<h2 class="major">Prelim Skills Examination</h2>
+							<span class="image main"><img src="images/pic12.png" alt="" /></span>
+							<h3 class="major">Objectives:</h3>
+							<p> 1.1 Individualize hosts </p>
+                            <p> 1.2 Apply tags in selecting plays to run </p>
+							<p>1.3Managing Services from remote servers using playbooks </p>
+							<h3 class="major">Steps: </h3>
+							<p><b>Step 1:</b> Create a repository in your Github account and label it as Surname_PrelimExam.</p>
+							<p><b>Step 2:</b> Clone the created repository in the Control Node</p>
+							<pre><code>$ git clone git@github.com:twinklegenon/Genon_PrelimExam</code></pre>
+							<p><b>Step 3: </b> In the control node, create an inventory file (insert the ip address of the remote servers) and ansible.cfg files. For the content of ansible.cfg file, refer below:</p>
+							<pre><code>[defaults]
+inventory = inventory
+host_key_checking = False
+
+deprecation_warnings = False
+
+remote_user = twinkle 
+private_key_file = ~/.ssh/</code></pre>
+<p><b>Step 4:</b> Create an Ansible playbook that does the following with an input of a config.yaml file for both Manage Nodes</p>
+							<pre><code>$ touch config.yaml</code></pre>
+							<pre><code>$ nano config.yaml</code></pre>
+							<p><b>Installs the latest python3 and pip3</b></p>
+							<pre><code>---
+- hosts: all
+  become: true 
+  tasks: 
+
+  - name: install python3 and pip3 for Ubuntu
+    apt:
+      name:
+        - python3
+        - python3-pip
+	  state: latest
+	  update_cache: yes
+	when: ansible_distribution == "Ubuntu"
+
+	- name: install python3 and pip3 package for CentOS
+    dnf:
+	  name:
+	    - python3
+	    - python3-pip
+	  state: latest
+	  update_cache: yes
+	when: ansible_distribution == "CentOS"</code></pre>
+
+	                        <p><b>Step 5: </b> Use pip3 as default pip and use python3 as default python. (Edit the inventory file)</p>
+							<pre><code>[defaults]
+
+inventory = inventory 
+host_key_checking = False
+
+deprecation_warnings = False
+
+ansible_python_interpreter=/usr/bin/python3
+ansible_python_version=/usr/bin/pip3
+
+remote_user = twinkle
+private_key_file = ~/.ssh/</code></pre>
+                            <p><b>Step 6:</b> Install the Java open-dfk</p>
+							<pre><code>---
+- hosts: all
+  become: true 
+  tasks: 
+							
+  - name: install python3 and pip3 for Ubuntu
+    apt:
+      name:
+        - python3
+        - python3-pip
+        - openjdk-8-jre
+	  state: latest
+	  update_cache: yes
+	when: ansible_distribution == "Ubuntu"
+								
+  - name: install python3 and pip3 package for CentOS
+    dnf:
+	  name:
+	    - python3
+	    - python3-pip
+	    - java-1.8.0-opendjdk
+	  state: latest
+	  update_cache: yes
+	when: ansible_distribution == "CentOS"</code></pre>
+	                        <p><b>Step 7:</b> Create Motd containing the text defined by a variable defined in config.yaml file and if there is no variable input the default motd is "Ansible Managed node by <i>(your user name)</i>. Create a user with a variable defined in config.yaml</p>
+							<pre><code>- name: changing the motd on Ubuntu
+  shell: sudo sh -c 'echo "Ansible Managed Node by Twinkle" > /etc/motd'
+  when: ansible_distribution == "Ubuntu"
+
+- name: changing the motd on CentOS
+  shell: sudo sh -c 'echo "Ansible Managed Node by Twinkle" > /etc/motd'
+  when: ansible_distribution == "CentOS"</code></pre>
+                            <p><b>Step 8: </b>PUSH and COMMIT your PrelimExam in your Github repository</p>
+							<pre><code>$ git status</code></pre>
+							<pre><code>$ git add</code></pre>
+							<pre><code>$ git commit -m <i>yourmessage</i></code></pre>
+							<pre><code>$ git push origin main</code></pre>		
+							<li><a href="https://drive.google.com/file/d/1-pZXxsiKh7LsxqJwvZc7IfFDKVLxDGWc/view?usp=share_link" class="button primary">Visit Prelim Exam</a></li>
+							<br> </br>
+							<li><a href="https://github.com/twinklegenon/Genon_PrelimExam" class="button primary">Visit Github link for Prelim Exam</a></li>
+						</article>	
+                    
+						<!-- Hands-On-Activity-6 -->
+						<article id="hoa6">
+							<h2 class="major"> Targeting Specific Nodes</h2>
+							<span class="image main"><img src="images/pic13.png" alt="" /></span>
+							<h3 class="major">Objectives:</h3>
+							<p> 1.1 Individualize hosts </p>
+                            <p> 1.2 Apply tags in selecting plays to run </p>
+							<p>1.3Managing Services from remote servers using playbooks </p>
+							<h3 class="major">Steps: </h3>
+                            <h3>Task 1 - Targeting Specific Nodes</h3>
+							<p><b>Step 1.1: </b> Create a new playbook and named it <code>site.yml</code>. Follow the commands as shown in the image below. Make sure to save the file and exit.</p>
+							<pre><code>---
+- hosts: all
+  become: true
+  tasks:
+
+  - name: install apache and php for Ubuntu servers
+    apt: 
+	  name:
+	    - apache2
+		- libapache2-mod-php
+	  state: latest
+	  update_cache: yes
+	when: ansible_distribution == "Ubuntu"
+
+  - name: install apache and php for CentOS servers
+    dnf:
+	  name:
+	    - httpd
+		- php_package
+	  state: latest
+	when: ansible_distribution == "CentOS"</code></pre>
+	                        <p><b>Step 1.2: </b> Edit the <code>inventory</code>file. Remove the variables from the last activity and group according to the codes below: </p>
+							<pre><code>[web_servers]
+192.168.56.120
+192.168.56.121
+
+[db_servers]
+192.168.56.122
+
+[file_servers]
+192.168.56.123</code></pre>
+                             <p><b>Step 1.3:</b> Edit the <code>site.yml</code> by following the codes below. Run the playbook using the commands: <code>ansible-playbook --ask-become-pass site.yml</code></p>
+							 <pre><code>- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: install updates (CentOS)
+    dnf:
+	  update_only: yes
+	  update_cache: yes
+	when: ansible_distribution == "CentOS"
+
+  - name: install updates (Ubuntu)
+    apt:
+	  update_only: yes
+	  update_cache: yes
+	when: ansible_distribution == "Ubuntu"
+
+- hosts: web_servers
+  become: true
+  tasks:
+  
+  - name: install apache and php for Ubuntu servers
+    apt:
+	  name: 
+	    - apache2
+		- libapache2-mod-php
+	  state: latest
+	when: ansible_distribution == "Ubuntu"
+
+  - name: install apache and php for CentOS8
+    dnf:
+	  name:
+	    - httpd
+		- php
+	  state: latest
+	when: ansible_distribution == "CentOS"</code></pre>
+	                        <p><b>Explanation: </b>The pre-tasks command tells the ansible to run it before any other thing. In the
+								pre-tasks, CentOS will install updates while Ubuntu will upgrade its distribution
+								package. This will run before running the secnano ond play, which is targeted
+								at web_servers. In the second play, apache and php will be installed on both
+								Ubuntu servers and CentOS servers.</p>
+							<p><b>Step 1.4:</b> Edit the <code>site.yml</code> file. This time, we are going to add plays
+								targeting the other servers. This time we target the <code>db_servers</code> by adding it on
+								the current <code>site.yml</code>. Below is an example: (Note add this at the end of the
+								playbooks from Step 1.3. Make sure to save the file and run the playbook file.</p>
+								<pre><code>- hosts: db_servers
+  become: true
+  tasks:
+
+  - name: install mariadb package (CentOS)
+    yum:
+	  name: mariadb-server
+	  state: latest
+	when: ansible_distribution =="Ubuntu"
+
+  - name: install mariadb package (Ubuntu)
+    apt:
+	  name: mariadb-server
+	  state: latest
+	when: ansible_distribution == "Ubuntu"
+
+  - name: "Mariadb - Restarting/Enabling"
+    service:
+	  name: mariadb
+	  state: restarted
+	  enabled: true</code></pre>
+	                        <p><b>Step 1.5:</b> Go to the remote servers (Ubuntu & CentOS) terminal that belongs to the <code>db_servers</code> group and check the status of the <code>mariadb</code> installation using the command:</p>
+							<pre><code>$ sudo systemctl status mariadb</code></pre>
+	                        <p><b>Step 1.6:</b> Edit the <code>site.yml</code> again. This time we will append the code to configure installation on the <code>file_servers</code> group. We can add the following codes below in our file. Make sure to save the file and run the playbook.</p>
+							<pre><code>- hosts: file_servers
+  become: true
+  tasks:
+
+  - name: install the samba package
+    package:
+	  name: samba
+	  state: latest</code></pre>
+	                        <h3>Task 2 - Using Tags in running playbooks</h3>
+							<p><b>Introduction: </b> In this task, our goal is to add metadata to our plays so that we can only run the plays
+								that we want to run, and not all the plays in our playbook.</p>
+	                        <p><b>Step 2.1:</b> Edit the <code>site.yml</code> file. Add tags to the playbook. After the name, we can place the tags: <code><i>name_of_tag</i></code>. This is an arbitrary command, which means that you can use any name for a tag. Make sure to save the file and run the playbook.</p>
+							<pre><code>- hosts: all
+become: true
+pre_tasks:
+
+  - name: install updates (CentOS)
+    tags: always
+    dnf:
+	  update_only: yes
+	  update_cache: yes
+	when: ansible_distribution == "CentOS"
+
+  - name: install updates (Ubuntu)
+    tags: always
+    apt:
+	  update_only: yes
+	  update_cache: yes
+	when: ansible_distribution == "Ubuntu"
+
+- hosts: web_servers
+  become: true
+  tasks:
+  
+  - name: install apache and php for Ubuntu servers
+    tags: apache,apache2,ubuntu
+    apt:
+	  name: 
+	    - apache2
+		- libapache2-mod-php
+	  state: latest
+	when: ansible_distribution == "Ubuntu"
+
+  - name: install apache and php for CentOS
+    tags: apache,centos,httpd
+    dnf:
+	  name:
+	    - httpd
+		- php
+	  state: latest
+	when: ansible_distribution == "CentOS"
+
+- hosts: db_servers
+  become: true
+  tasks:
+
+  - name: install mariadb package (CentOS)
+    tags: centos,db,mariadb
+    yum:
+	  name: mariadb-server
+	  state: latest
+	when: ansible_distribution =="Ubuntu"
+
+  - name: install mariadb package (Ubuntu)
+    tags: db,mariadb,ubuntu
+    apt:
+	  name: mariadb-server
+	  state: latest
+	when: ansible_distribution == "Ubuntu"
+
+  - name: "Mariadb - Restarting/Enabling"
+    service:
+	  name: mariadb
+	  state: restarted
+	  enabled: true
+	
+	  - hosts: file_servers
+	  become: true
+	  tasks:
+	
+  - name: install the samba package
+    tags: samba
+	package:
+	  name: samba
+	  state: latest</code></pre>
+	                        <p><b>Task 2.2: </b>On the local machine, try to issue the following commands and describe each results:</p>
+                            <pre><code>$ ansible-playbook --list-tags site.yml</code></pre>
+							<pre><code>$ ansible-playbook --tags centos --ask-become-pass site.yml</code></pre>
+							<pre><code>$ ansible-playbook --tags db --ask-become-pass site.yml</code></pre>
+							<pre><code>$ ansible-playbook --tags apache --ask-become-pass site.yml</code></pre>
+							<pre><code>$ ansible-playbook --tags "apache,db" --ask-become-pass site.yml</code></pre>
+							<h3>Task 3 - Managing Services</h3>
+							<p><b>Step 3.1:</b> Edit the file <code>site.yml</code> and add a play that will automatically start the httpd on CentOS server. Make sure to save the file and run the playbook.</p>
+							<pre><code> - name: install apache and php for CentOS servers
+  tags: apache,centos,httpd
+  dnf:
+    name:
+	  - httpd
+	  - php_package
+	state: latest
+  when: ansible_distribution == "CentOS"
+
+  - name: start httpd (CentOS)
+    tags: apache,centos,httpd
+	service:
+	  name: httpd
+	  state: started
+	when: ansible_distribution == "CentOS"</code></pre>
+                            <p><b>Step 3.2:</b>To test the starting of httpd service through ansible playbook, stop the service manually by using the command below. Run the playbook <code>site.yml</code> after stopping the service manually..</p>
+							<pre><code>$ sudo systemctl stop httpd</code></pre>
+                            <p><b>Step 3.3: </b>To automatically enable the service every time we run the playbook, use the command below.</p>
+							<pre><code>enabled: true</code></pre>
+                            <p>The command was inserted here:</p>
+							<pre><code>- name: start httpd (CentOS)
+    tags: apache,centos,httpd
+	service:
+	  name: httpd
+	  state: started
+	when: ansible_distribution == "CentOS"</code></pre>
+	                        <li><a href="https://drive.google.com/file/d/1tFGRgbLbWkjvkHkSUVwYXV1wHitwmHLH/view?usp=share_link" class="button primary">Hands-On Activity 6</a></li>
+	                        <br> </br>
+							<li><a href="https://github.com/twinklegenon/CPE232_HOA6_Genon" class="button primary">Visit Github link for Prelim Exam</a></li>
+						</article>	
+
+						<!-- Hands-On-Activity-7 -->
+						<article id="hoa7">
+							<h2 class="major">Managing Files and Creating </h2>
+							<h2 class="major">Roles in Ansible</h2>
+							<span class="image main"><img src="images/pic14.png" alt="" /></span>
+							<h3 class="major">Objectives:</h3>
+							<p> 1.1 Manage files in remote servers  </p>
+                            <p> 1.2 Implement roles in ansible </p>
+							<h3 class="major">Steps: </h3>
+							<h3>Task 1 - Create a file and copy it to remote servers</h3>
+							<p><b>Step 1.1:</b> Create a directory named <code>files</code>. Create a file named <code>default_site.html</code> inside the created directory. Edit the file and put a basic HTML syntax below. Any content will do, as long as it will display text later. Save the file and exit.</p>
+							<p><b>Step 1.2:</b> Edit the <code>site.yml</code> file and just below the <code>web_servers</code> play, create a new file to copy the default html file for site below. Save the file and run the playbook.</p>
+							<pre><code>- name: copy default html file for site
+  tags: apache,apache2,httpd
+  copy: 
+    src: default_site.html
+	dest: /var/www/html/index.html
+	owner: root
+	group: root
+	mode: 0644</code></pre>
+							<p><b>Step 1.3: </b>Go to the remote servers (web_servers) listed in your inventory. Use <code>cat</code>command to check if the <code>index.html</code> is the same as the local repository file <code>defaul_site.html</code>. Do both for Ubuntu and CentOS servers. On the CentOS server, go to the browser and type its Ip address.</p>
+							<pre><code>$ ssh username@ipaddress</code></pre>
+							<p><b>Explanation:</b> The command above is used to verify the index.html on the Ubuntu Server.</p>
+							<p><b>Step 1.4:</b> Sync your local repository with Github</p>
+							<pre><code>$ git status</code></pre>
+							<pre><code>$ git add</code></pre>
+							<pre><code>$ git commit -m "yourmessage"</code></pre>
+							<pre><code>$ git push origin main</code></pre>
+							<h3> Task 2 - Download a file and extract it to a remote server</h3>
+                            <p><b>Step 2.1: </b> Edit the <code>site.yml</code>. Just before the web_servers play, create a new play: </p>
+							<pre><code> - hosts: workstations
+  become: true
+  tasks:
+
+  - name: install unzip
+    package:
+	  name: unzip
+
+  - name: install terraform
+    unarchive
+
+	  src: <a href="https://releases.hashicorp.com/terraform/0.12.28/terraform_0.12.28_linux_a
+	md64.zip" >https://releases.hashicorp.com/terraform/0.12.28/terraform_0.12.28_linux_a
+	md64.zip</a>
+	  dest: /usr/local/bin
+      remote_src: yes
+      mode: 0755
+      owner: root
+      group: root</code></pre>
+	                        <p><b>Step 2.2:</b> Edit the <code>inventory</code> file and add <code>workstations</code> group. Add any ubuntu remote server. Make sure to remember the IP address. Save the file and run the playbook.</p>
+							<p><b>Step 2.3:</b> On the Ubuntu remote workstation, type <code>terraform</code> to verify the installation of terraform.</p>
+							<h3>Task 3 - Create Roles</h3>
+							<p><b>Step 3.1:</b> Edit the <code>site.yml</code>Configure roles as follows: (make sure to create a copy of the
+								old site.yml file because you will be copying the specific plays for all groups). Save the file and run the playbook.</p>
+							<pre><code>- hosts: all
+become: true
+pre_tasks:
+
+  - name: install updates (CentOS)
+    tags: always
+    dnf:
+	  update_cache: yes
+	  changed_when: false
+	when: ansible_distribution == "CentOS"
+
+  - name: install updates (Ubuntu)
+    tags: always
+    apt:
+	  update_cache: yes
+	  changed_when: false
+	when: ansible_distribution == "Ubuntu"
+
+- hosts: all
+  become: true
+  roles:
+    - base
+
+- hosts: workstations
+  become: true
+  roles:
+    - web_servers
+
+- hosts: web_servers
+  become: true
+  roles: 
+    - web_servers
+
+- hosts: db_servers
+  become: true
+  roles:
+    - db_servers
+
+- hosts: file_servers
+  become: true
+  roles:
+    - file_servers</code></pre>
+                            <p><b>Step 3.2: </b> Under the same directory, create a new directory and named it <code>roles</code>. Enter the roles directory and create new directories: base, web_servers, file_servers,
+								db_servers and workstations. For each directory, create a directory and name it
+								tasks.</p>
+								<pre><code>$ mkdir <i>directoryname</i></code></pre>
+								<p><b>Step 3.3:</b> Go to tasks for all directory and create a file. Name it <code>main.yml</code>. In each of the
+									tasks for all directories, copy and paste the code from the old site.yml file.
+									Show all contents of main.yml files for all tasks.</p>
+									<pre><code>$ touch main.yml</code></pre>
+								<p><b>Step 3.4: </b> Copy the content of the <code>site.yml</code>to all the <code>main.yml</code> on every directories. Save the files and run the playbook.</p> 
+								<p><b>Step 3.5: </b> Don't forget to backup the local repository to Github online using the commands <code>git status</code>, <code>git add</code>, <code>git commit -m <i>"yourmessage"</i></code> and <code>git push origin main</code>.</p> 
+							<li><a href="https://drive.google.com/file/d/1-3sOcOVrbiPMn8A4lbNtM9LUyGEamHVD/view?usp=share_link" class="button primary">Hands-On Activity 7</a></li>
+							<br> </br>
+							<li><a href="https://github.com/twinklegenon/CPE232_HOA7_Genon" class="button primary">Visit Github link Hands-On Activity 7</a></li>
+						</article>	
+
+						<!-- Hands-On-Activity-8 -->
+						<article id="hoa8">
+							<h2 class="major">Install, Configure, and  </h2>
+							<h2 class="major"> Manage Enterprise Availability </h2>
+							<h2 class="major"> Monitoring via Ansible</h2>
+							<span class="image main"><img src="images/pic15.png" alt="" /></span>
+							<h3 class="major">Objectives:</h3>
+							<p> Create and design a workflow that installs, configure and manage enterprisepgg
+								monitoring tools using Ansible as an Infrastructure as Code (IaC) tool. </p>
+							<h3 class="major">Steps: </h3>
+							<h3>Task 1 - Create a playbook that installs Nagios in both Ubuntu and CentOS. Apply the
+								concept of creating roles.</h3>
+								<span class="image main"><img src="images/pic32.png" alt="" /></span>
+								<h3>Task 2 - Describe how you did step 1 (A manual). </h3>
+                            <p><b>Step 2.1:</b> Create a new directory named <code>HOA8</code>. Copy all the needed files from
+								previous activity such as the <code>inventory</code>, <code>ansible.cfg</code> and <code>site.yml</code> (for
+								reference only).</p>
+							<p><b>Step 2.2:</b> Create a new directory named <code>roles</code>. In the roles directory, create
+								a new directory named <code>nagios_servers</code>. In the nagios_servers directory, create a directory named <code>task</code>s. In the tasks directory, create a file named
+								<code>main.yml</code>.</p>
+							<p><b>Step 2.3:</b> Edit the <code>inventory</code> and added a new set of servers named
+								<code>[nagios_servers]</code>. Put the ip addresses of my Ubuntu server and CentOS
+								server here. Use the same content of <code>ansible.cfg</code>.</p>
+							<p><b>Step 2.4:</b> In the HOA8 directory, create a file named <code>nagios.yml</code>. This is where
+								you will put the <code>pre_tasks</code> and <code>roles</code>.</p>
+							<p><b>Step 2.5:</b> In the tasks directory, edit the main.yml and insert the codes
+								for installing, configuring and managing the nagios on Ubuntu server 
+								and CentOS. Use the <code>when</code> command to specify the two linux distribution</p>
+							<p><b>Step 2.6:</b> Run the playbook using the command <code>ansible-playbook --ask-become-pass nagios.yml</code></p>
+                            <pre><code>#ubuntu
+- name: Installing nagios dependencies and libraries
+  tags: dependecies, libraries
+  apt:
+    name:
+      - autoconf
+      - gcc
+      - libc6
+      - make
+      - wget
+      - unzip
+      - apache2
+      - libapache2-mod-php7.4
+      - libgd-dev
+      - openssl
+      - libssl-dev
+      - autoconf
+      - gcc
+      - libc6
+      - libmcrypt-dev
+      - make
+      - bc
+      - gawk
+      - dc
+      - build-essential
+      - snmp
+      - libnet-snmp-perl
+      - gettext
+      - python3-pip
+      - python3
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Install passlib python pckg
+  pip:
+    name: passlib
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Creating a directory named nagios
+  file:
+    path: ~/nagios
+    state: directory
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Download nagios
+  unarchive:
+    src: https://github.com/NagiosEnterprises/nagioscore/archive/nagios-4.4.6.tar.gz
+    dest: ~/nagios
+    remote_src: yes
+    mode: 0755
+    owner: root
+    group: root
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Setting the nagios
+  shell:
+    cd ~/nagios/nagioscore-*
+    sudo ./configure --with-httpd-conf=/etc/apache2/sites-enabled
+    sudo make all
+    sudo make install-groups-users
+    sudo usermod -a -G nagios www-data
+    sudo make install
+    sudo make install-daemoninit
+    sudo make install-commandmode
+    sudo make install-config
+    sudo make install-webconf
+    sudo a2enmod rewrite
+    sudo a2enmod cgi
+  when: ansible_distribution == "Ubuntu"
+  
+- name: download nagios plugins
+  unarchive: 
+    src: https://github.com/nagios-plugins/nagios-plugins/archive/release-2.3.3.tar.gz
+    dest: ~/nagios
+    remote_src: yes
+    mode: 0755
+    owner: root
+    group: root
+  when: ansible_distribution == "Ubuntu"
+  
+- name: installing nagios plugins
+  shell:
+    cd ~/nagios/nagios-plugins*
+    ./tools/setup
+    ./configure
+    make
+    make install
+  when: ansible_distribution == "Ubuntu"
+  
+- name: create user and pass
+  community.general.htpasswd:
+    path: /usr/local/nagios/etc/htpasswd.users
+    name: nagiosadmin
+    password: Yaj159159
+  when: ansible_distribution == "Ubuntu"
+  
+- name: start and enable nagios
+  service:
+    name: nagios
+    state: restarted
+    enabled: true
+  when: ansible_distribution == "Ubuntu"
+  
+- name: start and enable httpd
+  service: 
+    name: apache2
+    state: restarted
+    enabled: true
+  when: ansible_distribution == "Ubuntu"
+
+#centos
+#centos
+#centos
+- name: Installing nagios dependencies and libraries
+  tags: dependecies, libraries
+  yum:
+    name:
+      - gcc
+      - glibc
+      - glibc-common
+      - perl
+      - httpd
+      - php
+      - wget
+      - gd
+      - gd-devel
+      - openssl-devel
+      - gcc
+      - glibc
+      - glibc-common
+      - make
+      - gettext
+      - automake
+      - autoconf
+      - wget
+      - openssl-devel
+      - net-snmp-utils
+      - python2-pip
+    state: latest
+  when: ansible_distribution == "CentOS"
+  
+- name: Install passlib python pckg
+  pip:
+    name: passlib
+  when: ansible_distribution == "CentOS"
+  
+- name: Creating a directory named nagios
+  file:
+    path: ~/nagios
+    state: directory
+  when: ansible_distribution == "CentOS"
+  
+- name: Download nagios
+  unarchive:
+    src: https://github.com/NagiosEnterprises/nagioscore/archive/nagios-4.4.6.tar.gz
+    dest: ~/nagios
+    remote_src: yes
+    mode: 0777
+    owner: root
+    group: root
+  when: ansible_distribution == "CentOS"
+  
+- name: install nagios and compiling it
+  shell:
+    cd ~/nagios/nagioscore-**
+    ./configure
+    make all
+    make install-groups-users
+    usermod -a -G nagios apache
+    make install
+    make install-daemoninit
+    make install-commandmode
+    make install-config
+    make install-webconf
+  when: ansible_distribution == "CentOS"
+  
+- name: downlaod nagios and exract it
+  unarchive:
+    src: https://github.com/nagios-plugins/nagios-plugins/archive/release-2.3.3.tar.gz
+    dest: ~/nagios
+    remote_src: yes
+    mode: 0777
+    owner: root
+    group: root
+  when: ansible_distribution == "CentOS"
+  
+- name: Install nagios plugins
+  shell:
+    cd ~/nagios/nagios-plugins*
+    ./tools/setup
+    ./configure
+    make
+    make install
+  when: ansible_distribution == "CentOS"
+  
+- name: Create user and pass file
+  community.general.htpasswd:
+    path: /usr/local/nagios/etc/htpasswd.users
+    name: nagiosadmin
+    password: Yaj159159
+  when: ansible_distribution == "CentOS"
+  
+- name: start and enable nagios
+  service:
+    name: nagios
+    state: restarted
+    enabled: true
+  when: ansible_distribution == "CentOS"
+  
+- name: start and enable httpd
+  service:
+    name: httpd
+    state: restarted
+    enabled: true
+  when: ansible_distribution == "CentOS"</code></pre>
+							<h3>Task 3 - Show an output of the installed Nagios for both Ubuntu and CentOS.</h3>
+							<span class="image main"><img src="images/pic35.png" alt="" /></span>
+                            <h3>Task 4 - Make sure to create a new repository in GitHub for this activity.</h3>
+							<pre><code>$ git status</code></pre>
+							<pre><code>$ git add</code></pre>
+							<pre><code>$ git commit -m "yourmessage"</code></pre>
+							<pre><code>$ git push origin main</code></pre>
+							
+							<li><a href="https://drive.google.com/file/d/1bKz4Hg9W8euNLX6_EaQqkERkq2XUz0xb/view?usp=share_link" class="button primary">Hands-On Activity 8</a></li>
+							<br> </br>
+							<li><a href="https://github.com/twinklegenon/CPE232_HOA8_Genon" class="button primary">Visit Github link Hands-On Activity 8</a></li>
+						</article>	
+
+						<!-- Hands-On-Activity-9 -->
+						<article id="hoa9">
+							<h2 class="major">Install, Configure and Manage </h2>
+							<h2 class="major">Enterprise Performance </h2>
+							<h2 class="major"> Monitoring via Ansible</h2>
+							<span class="image main"><img src="images/pic16.png" alt="" /></span>
+							<h3 class="major">Objectives:</h3>
+							<p> Create and design a workflow that installs, configure and manage enterprise
+								performance tools using Ansible as an Infrastructure as Code (IaC) tool. </p>
+							<h3 class="major">Steps: </h3>
+							<h3>Task 1 - Create a playbook that installs Prometheus in both Ubuntu and CentOS. Apply
+								the concept of creating roles.</h3>
+								<span class="image main"><img src="images/pic33.png" alt="" /></span>
+							<h3>Task 2 - Describe how you did step 1. (A manual)</h3>
+                            <p><b>Step 2.1:</b> Create a repository named <code>CPE232_HOA9_Genon</code> in Github. Use the
+								command <code>git clone</code> to clone the repository in our Git (Local).</p>
+							<p><b>Step 2.2:</b> Step 2. In CPE232_HOA9_Genon directory, copy the <code>ansible.cfg</code> and
+								<code>inventory</code> from the previous activity. There will be no changes in the file
+								ansible.cfg. Edit the inventory and Insert the ip addresses of Ubuntu and
+								CentOS under <code>[prome_servers]</code>.</p>
+								
+							<p><b>Step 2.3:</b> In the same directory, create a file named <code>prome.yml</code>. Edit the
+								prome.yml and insert the <code>pre_tasks</code> from our previous activity. Add the
+								prome_servers as the host and a role.</p>
+							
+							<p><b>Step 2.4:</b> Create a directory named <code>roles</code>. In roles directory, create a directory
+								named <code>prome_servers</code>. In the prome_servers directory, create a directory
+								named <code>tasks</code>. In the tasks directory, create a file named <code>main.yml</code>.</p>
+
+							<p><b>Step 2.5:</b> Create the following files on the <code>prome_servers</code> directory. Refer to the link for the content of the following files: <a href="https://github.com/sbouii/prometheus-ansible" >https://github.com/sbouii/prometheus-ansible</a></p>
+							<span class="image main"><img src="images/pic34.png" alt="" /></span>
+                            <p><b>Step 2.6:</b> Go to directory <code>roles/prome_servers/tasks</code> using cd command. edit
+								the file named <code>main.yml</code> using nano command.</p>
+							<pre><code>---
+#Ubuntu
+- name: install promtheus (Ubuntu)
+  tags: prometheus,ubuntu
+  apt:
+    name: prometheus
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+
+#CentOS
+- name: packages for prometheus installation (CentOS)
+  tags: snapd, epel-release, centos
+  yum:
+    name:
+      - epel-release
+      - snapd
+    state: latest
+  when: ansible_distribution == "CentOS"
+
+- name: enable snapd for CentOS
+  tags: snapd, centos
+  command: systemctl enable --now snapd.socket
+  when: ansible_distribution == "CentOS"
+
+- name: install prometheus for CentOS
+  tags: centos,prometheus
+  command: snap install prometheus --classic
+  when:  ansible_distribution == "CentOS"</code></pre>
+
+							<h3>Task 3 - Show an output of the installed Prometheus for both Ubuntu and CentOS.</h3>
+							<span class="image main"><img src="images/pic36.png" alt="" /></span>
+							<h3>Task 4 - Make sure to create a new repository in GitHub for this activity.</h3>
+							<pre><code>$ git status</code></pre>
+							<pre><code>$ git add</code></pre>
+							<pre><code>$ git commit -m "yourmessage"</code></pre>
+							<pre><code>$ git push origin main</code></pre>
+
+							<li><a href="https://drive.google.com/file/d/1cMfoSho5wa1s95ewALW8hmiI_LUs1l9h/view?usp=share_link" class="button primary">Hands-On Activity 9</a></li>
+							<br> </br>
+							<li><a href="https://github.com/twinklegenon/CPE232_HOA9_Genon" class="button primary">Visit Github link Hands-On Activity 9</a></li>
+						</article>	
+
+						<!-- Hands-On-Activity-10 -->
+						<article id="hoa10">
+							<h2 class="major">Install, Configure and Manage</h2>
+							<h2 class="major">Enterprise Log Monitoring</h2>
+							<h2 class="major">via Ansible</h2>
+							<span class="image main"><img src="images/pic17.png" alt="" /></span>
+							<h3 class="major">Objectives:</h3>
+							<p> Create and design a workflow that installs, configure and manage enterprise log
+								monitoring tools using Ansible as an Infrastructure as Code (IaC) tool. </p>
+							<h3 class="major">Steps: </h3>
+                            <h3>Task 1&2 - Create a playbook that: Install and configure Elastic Stack in separate hosts (Elastic Search,
+								Kibana, Logstash) and apply the concept of creating roles.</h3>
+							<h3>Task 3 - Describe how you did step 1.</h3>
+
+							<span class="image main"><img src="images/pic37.png" alt="" /></span>		
+							<p><b>Step 1: </b>Create a repository and clone it to the local Git.</p>
+							<pre><code>$ git clone</code></pre>
+							<p><b>Step 2: </b> In CPE232_HOA10_Genon directory, copy the <code>ansible.cfg</code> and <code>inventory</code> files.
+								Edit the inventory and insert the following codes. For ansible.cfg, there will be no
+								changes.</p>
+							<p><b>Step 3: </b> In the CPE232_HOA9_Genon directory, create a directory named <codes>roles </codes>to
+								apply the concept of roles. In the roles directory create the following directories. On
+								every directory, create a directory named <code>tasks</code>. 
+							
+							<p><b>Step 4: </b> In CPE232_HOA10_Genon, create a file named <code>site.yml</code>. I inserted the
+								<code>pre_tasks</code> to update the repository indexes. In the bottom, I added the <code>elkservers</code> as
+								the host and the roles I have created.</p>
+								
+								
+							<p><b>Step 5:</b>Create a file named <code>main.yml</code> on
+								every tasks directory. Insert the codes for Elastic Stack (Elastic Search, Logstash, Kibana)</p>
+								<span class="image main"><img src="images/pic38.png" alt="" /></span>
+							
+							<h3>Elastic Search</h3>
+                            <pre><code>---
+#
+# Install/run elasticsearch 
+  ###UBUNTU
+  ###UBUNTU
+  ###UBUNTU
+- name: Install ELK Dependencies (Ubuntu)
+  apt:
+    name:
+      - openjdk-11-jdk
+      - apt-transport-https
+      - curl
+      - gpgv
+      - gpgsm
+      - gnupg-l10n
+      - gnupg
+      - dirmngr
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+   
+- name: Get PGP Key (Ubuntu)
+  apt_key:
+    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Install Elasticsearch repository into sources list (Ubuntu)
+  apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
+    state: present
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Install Elasticsearch (Ubuntu)
+  apt:
+    name: elasticsearch
+    state: latest
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Configure Elasticsearch change cluster name (Ubuntu)
+  lineinfile:
+    dest: /etc/elasticsearch/elasticsearch.yml
+    line: "cluster.name: demo-elk"
+    state: present
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Configure Elasticsearch give cluster descriptive name (Ubuntu)
+  lineinfile:
+    dest: /etc/elasticsearch/elasticsearch.yml
+    line: "node.name: elk-1"
+    state: present
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Configure Elasticsearch Add network.host (Ubuntu)
+  lineinfile:
+    dest: /etc/elasticsearch/elasticsearch.yml
+    line: "network.host: 0.0.0.0"
+    state: present
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Configure Elasticsearch Add http.port (Ubuntu)
+  lineinfile:
+    dest: /etc/elasticsearch/elasticsearch.yml
+    line: "http.port: 9200"
+    state: present
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Configure Elasticsearch Add discovery.type (Ubuntu)
+  lineinfile:
+    dest: /etc/elasticsearch/elasticsearch.yml
+    line: "discovery.type: single-node"
+    state: present
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Creating an empty file for startup-timeout.conf 1 of 2 (Ubuntu)
+  file:
+    path: "/etc/systemd/system/elasticsearch.service.d"
+    state: directory
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Creating an empty file for startup-timeout.conf 2 of 2 (Ubuntu)
+  file:
+    path: "/etc/systemd/system/elasticsearch.service.d/startup-timeout.conf"
+    state: touch
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Prevent systemd service start operation from timing out (Ubuntu)
+  copy:
+    dest: "/etc/systemd/system/elasticsearch.service.d/startup-timeout.conf"
+    content: |
+      [Service]
+      TimeoutStartSec=3min
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Run daemon-reload for elasticsearch (Ubuntu)
+  systemd: daemon_reload=yes
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Enable service Elasticsearch and ensure it is not masked (Ubuntu)
+  systemd:
+    name: elasticsearch
+    enabled: yes
+    masked: no
+  when: ansible_distribution == "Ubuntu"
+  
+- name: ensure elasticsearch is running (Ubuntu)
+  systemd: state=started name=elasticsearch
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Start Elasticsearch for Ubuntu
+  shell: systemctl start elasticsearch
+  when: ansible_distribution == "Ubuntu"
+  ###CENTOS
+  ###CENTOS
+  ###CENTOS
+- name: Install ELK Dependencies CentOs
+  yum:
+    name:
+      - java-11-openjdk
+      - curl
+      - gnupg
+    state: latest
+  when: ansible_distribution == "CentOS"
+  
+- name: install elasticsearch rpm key CentOs
+  rpm_key:
+    key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+  become: true
+  when: ansible_distribution == "CentOS"
+
+- name: install elasticsearch 7.x rpm repository
+  yum_repository:
+    name: Elastic_7.X_repo
+    baseurl: https://artifacts.elastic.co/packages/7.x/yum
+    gpgcheck: true
+    gpgkey: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    description: Elastic 7.X Repo
+  become: true
+  when: ansible_distribution == "CentOS"
+
+- name: Install Elasticsearch (CentOs)
+  yum:
+    name: elasticsearch
+    state: latest
+    update_cache: yes
+  when: ansible_distribution == "CentOS"
+
+- name: Configure Elasticsearch change cluster name (CentOs)
+  lineinfile:
+    dest: /etc/elasticsearch/elasticsearch.yml
+    line: "cluster.name: demo-elk"
+    state: present
+  when: ansible_distribution == "CentOS"
+  
+- name: Configure Elasticsearch give cluster descriptive name (CentOs)
+  lineinfile:
+    dest: /etc/elasticsearch/elasticsearch.yml
+    line: "node.name: elk-1"
+    state: present
+  when: ansible_distribution == "CentOS"
+  
+- name: Configure Elasticsearch Add network.host (CentOs)
+  lineinfile:
+    dest: /etc/elasticsearch/elasticsearch.yml
+    line: "network.host: 0.0.0.0"
+    state: present
+  when: ansible_distribution == "CentOS"
+  
+- name: Configure Elasticsearch Add http.port (CentOs)
+  lineinfile:
+    dest: /etc/elasticsearch/elasticsearch.yml
+    line: "http.port: 9200"
+    state: present
+  when: ansible_distribution == "CentOS"
+  
+- name: Configure Elasticsearch Add discovery.type (CentOs)
+  lineinfile:
+    dest: /etc/elasticsearch/elasticsearch.yml
+    line: "discovery.type: single-node"
+    state: present
+  when: ansible_distribution == "CentOS"
+  
+- name: Creating an empty file for startup-timeout.conf 1 of 2 (CentOs)
+  file:
+    path: "/etc/systemd/system/elasticsearch.service.d"
+    state: directory
+  when: ansible_distribution == "CentOS"
+  
+- name: Creating an empty file for startup-timeout.conf 2 of 2 (CentOs)
+  file:
+    path: "/etc/systemd/system/elasticsearch.service.d/startup-timeout.conf"
+    state: touch
+  when: ansible_distribution == "CentOS"
+  
+- name: Prevent systemd service start operation from timing out (CentOs)
+  copy:
+    dest: "/etc/systemd/system/elasticsearch.service.d/startup-timeout.conf"
+    content: |
+      [Service]
+      TimeoutStartSec=3min
+  when: ansible_distribution == "CentOS"
+  
+- name: Run daemon-reload for elasticsearch CentOs
+  systemd: daemon_reload=yes
+  when: ansible_distribution == "CentOS"
+  
+- name: Enable service Elasticsearch and ensure it is not masked CentOs
+  systemd:
+    name: elasticsearch
+    enabled: yes
+    masked: no
+  when: ansible_distribution == "CentOS"
+  
+#- name: ensure elasticsearch is running for CentOs
+#  systemd: state=started name=elasticsearch
+#  when: ansible_distribution == "CentOS"
+  
+#- name: Start Elasticsearch for CentOS
+#  shell: systemctl start elasticsearch
+#  when: ansible_distribution == "CentOS"</code></pre>
+							<h3>Logstash</h3>
+							<pre><code>---
+   ###UBUNTU
+  ###UBUNTU
+  ###UBUNTU
+- name: Install Logstash (Ubuntu)
+  apt:
+    name: logstash
+    state: latest
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Run daemon-reload for logstash (Ubuntu)
+  systemd: daemon_reload=yes
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Enable service logstash (Ubuntu)
+  systemd:
+    name: logstash
+    enabled: yes
+  when: ansible_distribution == "Ubuntu"
+  
+- name: ensure logstash is running (Ubuntu)
+  systemd: state=started name=logstash
+  when: ansible_distribution == "Ubuntu"
+
+# Install/run logstash
+###CENTOS
+###CENTOS
+
+- name: Install Logstash CentOs
+  dnf:
+    name: logstash
+    state: latest
+    update_cache: yes
+  when: ansible_distribution == "CentOS"
+
+- name: Run daemon-reload for logstash for CentOs
+  systemd: daemon_reload=yes
+  when: ansible_distribution == "Ubuntu"
+
+- name: Enable service logstash for CentOs
+  systemd:
+    name: logstash
+    enabled: yes
+  when: ansible_distribution == "CentOS"
+
+- name: ensure logstash is running for CentOs
+  systemd: state=started name=logstash
+  when: ansible_distribution == "CentOS"</code></pre>
+                            <h3>Kibana</h3>
+							<pre><code>##kibana
+##UBUNTU
+##UBUNTU
+- name: Install Kibana (Ubuntu)
+  apt:
+    name: kibana
+    state: latest
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Configure Kibana Add server.port (Ubuntu)
+  lineinfile:
+    dest: /etc/kibana/kibana.yml
+    line: "server.port: 5601"
+    state: present
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Configure Kibana Add server.host (Ubuntu)
+  lineinfile:
+    dest: /etc/kibana/kibana.yml
+    line: 'server.host: “0.0.0.0”'
+    state: present
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Configure Kibana Add server.name (Ubuntu)
+  lineinfile:
+    dest: /etc/kibana/kibana.yml
+    line: 'server.name: “demo-kibana”'
+    state: present
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Configure Kibana Add elasticsearch.hosts (Ubuntu)
+  lineinfile:
+    dest: /etc/kibana/kibana.yml
+    line: 'elasticsearch.hosts: [“http://0.0.0.0:9200"]'
+    state: present
+  when: ansible_distribution == "Ubuntu"
+
+- name: Run daemon-reload for kibana (Ubuntu)
+  systemd: daemon_reload=yes
+
+- name: Enable service Kibana (Ubuntu)
+  systemd:
+    name: kibana
+    enabled: yes
+  when: ansible_distribution == "Ubuntu"
+
+- name: Start Elasticsearch service
+  shell: systemctl start elasticsearch
+  when: ansible_distribution == "Ubuntu"
+  
+- name: Start Kibana
+  shell: systemctl start kibana
+  when: ansible_distribution == "Ubuntu"
+##CENTOS
+##CENTOS
+- name: Install Kibana for CentOs
+  yum:
+    name: kibana
+    state: latest
+    update_cache: yes
+  when: ansible_distribution == "CentOS"
+  
+- name: Configure Kibana Add server.port for CentOs
+  lineinfile:
+    dest: /etc/kibana/kibana.yml
+    line: "server.port: 5601"
+    state: present
+  when: ansible_distribution == "CentOS"
+  
+- name: Configure Kibana Add server.host for CentOs
+  lineinfile:
+    dest: /etc/kibana/kibana.yml
+    line: 'server.host: “0.0.0.0”'
+    state: present
+  when: ansible_distribution == "CentOS"
+  
+- name: Configure Kibana Add server.name for CentOs
+  lineinfile:
+    dest: /etc/kibana/kibana.yml
+    line: 'server.name: “demo-kibana”'
+    state: present
+  when: ansible_distribution == "CentOS"
+  
+- name: Configure Kibana Add elasticsearch.hosts for CentOs
+  lineinfile:
+    dest: /etc/kibana/kibana.yml
+    line: 'elasticsearch.hosts: [“http://0.0.0.0:9200"]'
+    state: present
+  when: ansible_distribution == "CentOS"
+  
+- name: Run daemon-reload for kibana for CentOs
+  systemd: daemon_reload=yes
+  when: ansible_distribution == "CentOS"
+  
+- name: Enable service Kibana for CentOs
+  systemd:
+    name: kibana
+    enabled: yes
+  when: ansible_distribution == "CentOS"
+  
+- name: Start Kibana for CentOS
+  shell: systemctl start kibana
+  when: ansible_distribution == "CentOS"</code></pre>		
+
+							<h3>Task 4 - Show an output of the installed Elastic Stack (Elastic Search, Logstash, Kibana) for both Ubuntu and CentOS.</h3>
+							<h3>UBUNTU</h3>
+							<span class="image main"><img src="images/pic39.png" alt="" /></span>
+                            <h3>CENTOS</h3>
+							<span class="image main"><img src="images/pic40.png" alt="" /></span>
+							<h3>Task 5 - Make sure to create a new repository in GitHub for this activity.</h3>
+							<pre><code>$ git status</code></pre>
+							<pre><code>$ git add</code></pre>
+							<pre><code>$ git commit -m "yourmessage"</code></pre>
+							<pre><code>$ git push origin main</code></pre>
+							<li><a href="https://drive.google.com/file/d/1qL7TyVBTRH4yMqqUyh6itsGaQOWPjDx-/view?usp=share_link" class="button primary">Hands-On Activity 10</a></li>
+							<br></br>
+							<li><a href="https://github.com/twinklegenon/CPE232_HOA10_Genon" class="button primary">Visit Github link Hands-On Activity 10</a></li>
+							
+						</article>	
+
+
+						<!-- Midterm Examination -->
+						<article id="midterm">
+							<h2 class="major">Midterm Skills Examination</h2>
+							<span class="image main"><img src="images/pic22.png" alt="" /></span>
+							<h3> Task 1 - Create a repository in your Github account and Label it CPE_MIDTERM_SURNAME</h3>
+                            
+							<h3>Task 2 - Clone the repository and do the following:</h3>
+							<pre><code>$ git clone </code></pre>
+							<p><b>Step 2.1: </b> Create an Ansible playbook that does the following with an input of a
+								config.yaml file and arranged Inventory file:</p>
+							<h3>config.yaml</h3>
+							<pre><code>---
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: update repository index (CentOS)
+    tags: always
+    dnf:
+      update_cache: yes
+    changed_when: false
+    when: ansible_distribution == "CentOS"
+
+  - name: update repository index (Ubuntu)
+    tags: always
+    apt:
+      update_cache: yes
+    changed_when: yes
+    when: ansible_distribution == "Ubuntu"
+
+- hosts: all
+  become: true
+  roles:
+    - elastic_search
+    - kibana
+    - logstash
+    - nagios
+    - grafana
+    - prome
+    - influxdb
+    - lampstack</code></pre>
+
+							<p><b>Step 2.2: </b> Install and configure Elastic Stack in separate hosts (Elastic Search, Kibana,
+								Logstash) • Install Nagios in one host</p> 
+								<li><a href="https://github.com/twinklegenon/CPE_MIDEXAM_GENON/tree/main/roles/elastic_search/tasks" >Elastic Search</a></li>
+								<li><a href="https://github.com/twinklegenon/CPE_MIDEXAM_GENON/tree/main/roles/logstash/tasks" >Logstash</a></li>
+								<li><a href="https://github.com/twinklegenon/CPE_MIDEXAM_GENON/tree/main/roles/kibana/tasks" >Kibana</a></li>
+								<li><a href="https://github.com/twinklegenon/CPE_MIDEXAM_GENON/tree/main/roles/nagios/tasks" >Nagios</a></li>
+							<p><b>Step 2.3: </b>Install Grafana,Prometheus and Influxdb in seperate hosts
+								(Influxdb,Grafana,Prometheus)</p>
+							    <li><a href="https://github.com/twinklegenon/CPE_MIDEXAM_GENON/tree/main/roles/grafana/tasks" >Grafana</a></li>
+							    <li><a href="https://github.com/twinklegenon/CPE_MIDEXAM_GENON/tree/main/roles/prome" >Prometheus</a></li>
+							    <li><a href="https://github.com/twinklegenon/CPE_MIDEXAM_GENON/tree/main/roles/influxdb/tasks" >Influxdb</a></li>
+							    <p><b> Step 2.4: </b>Install Lamp Stack in separate hosts (Httpd + Php,Mariadb)</p>
+                                <li><a href="https://github.com/twinklegenon/CPE_MIDEXAM_GENON/tree/main/roles/lampstack/tasks" >Lampstack</a></li>
+
+                            <h3>Step 2.5: Document the push and commit from the local repository to GitHub.</h3>
+							   <pre><code>$ git status</code></pre>
+							   <pre><code>$ git add</code></pre>
+							   <pre><code>$ git commit -m "yourmessage"</code></pre>
+							   <pre><code>$ git push origin main</code></pre>
+							   <li><a href="https://drive.google.com/file/d/1H2sCG3JAl_Xgd_Cv2NqoqmgawWFlwqqQ/view?usp=share_link" class="button primary">Visit Midterm Exam</a></li>
+							   <br> </br>
+							   <li><a href="https://github.com/twinklegenon/CPE_MIDEXAM_GENON" class="button primary">Visit Github link for Midterm Exam</a></li>
+						</article>	
+
+
+						<!-- Hands-On-Activity-11 -->
+						<article id="hoa11">
+							<h2 class="major">Containerization</h2>
+							<span class="image main"><img src="images/pic20.png" alt="" /></span>
+							<h3 class="major">Objectives:</h3>
+							<p> Create a Dockerfile and form a workflow using Ansible as Infrastructure as Code (IaC)
+								to enable Continuous Delivery process </p>
+							<h3 class="major">Steps: </h3>
+							<h3>Task 1 - Create a new repository for this activity and clone the repository.</h3>
+                            <pre><code>$ git clone</code></pre>
+							<h3>Task 2 - Install Docker and enable the docker socket</h3>
+                            <pre><code>$ sudo apt install docker.io</code></pre>
+                            <pre><code>$ sudo systemctl enable docker</code></pre>
+							<pre><code>$ sudo systemctl start docker</code></pre>
+							<pre><code>$ sudo systemctl status docker</code></pre>
+                            <p>To check if the docker is really installed and running our server use the command below.</p>
+							<pre><code>$ sudo docker run hello-world</code></pre>
+							<h3>Task 3 - Add a Docker group to your current user.</h3>
+                            <pre><code>$ grep docker /etc/group</code></pre>
+							<pre><code>$ sudo usermod -aG docker twinkle</code></pre>
+							<pre><code>$ sudo groupadd docker</code></pre>
+							<pre><code>$ sudo systemctl restart docker</code></pre>
+                        
+							<h3>Task 4 - Create a Dockerfile to install web and DB servers. Use the commands below to run the dockerfile. </h3>
+							<p>The command <code>docker images</code> is used to verify the running images such as the <code>apache-test</code>, <code>mariadb-server</code>, <code>hello-world</code>.</p>
+                            <pre><code>FROM ubuntu
+MAINTAINER twinkle <qtsgenon@tip.edu.ph>
+
+# skip prompts
+ARG DEBIAN_FRONTEND=noninteractive
+
+# update packages
+RUN apt-get update; apt dist-upgrade -y
+
+# install webserver
+RUN apt-get install -y apache2
+
+# install dbserver
+RUN apt-get install -y mariadb-server
+
+# set entrypoint 
+ENTRYPOINT apache2ctl -D FOREGROUND</code></pre>
+                            <pre><code>$ docker build -t apache-test:1.2 .</code></pre>
+							<pre><code>$ docker build -t mariadb-server .</code></pre>
+                            <pre><code>$ docker images</code></pre>
+							<p><b>We can see that apache-test and mariadb-server is now on our docker images because we run it from the previous step</b></p>
+							<span class="image main"><img src="images/pic41.png" alt="" /></span>
+                            <span class="image main"><img src="images/pic42.png" alt="" /></span>
+							<h3>Task 5 - Install and build the Dockerfile using Ansible.</h3>
+                            <p>Create a file named <code>docker.yml</code> and insert the following codes below. Save the file and run the playbook.</p>
+							<pre><code>---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: install updates (Ubuntu)
+    tags: always
+    apt:
+      upgrade: dist
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+  - name: dpkg configure
+    shell:
+      dpkg --configure -a
+    when: ansible_distribution == "Ubuntu"
+
+  - name: docker installation
+    apt:
+      name: docker.io
+      state: latest
+    when: ansible_distribution == "Ubuntu"
+
+  - name: install docker SDK
+    shell:
+      pip install docker-py
+    when: ansible_distribution == "Ubuntu"
+
+  - name: docker enable
+    service:
+      name: docker
+      state: started
+      enabled: true
+
+  - name: add docker group on the current user
+    shell:
+      usermod -aG docker twinkle
+
+  - name: restart docker
+    service:
+      name: docker
+      state: restarted
+      enabled: true
+
+   ## BUILDING DOCKER
+  - name: create build directory
+    file:
+       path: ./root/demo-dockerfile
+       state: directory
+       owner: root
+       group: root
+       mode: '0755'
+
+  - name: copy Dockerfile
+    copy:
+      src: ./Dockerfile
+      dest: ./root/demo-dockerfile/Dockerfile
+      owner: root
+      group: root
+      mode: '0644'
+
+  - name: build container image
+    docker_image:
+      name: dockerr
+      source: build
+      build:
+        path: ./root/demo-dockerfile
+        args:
+          listen_port: 8080
+      state: present
+
+  - name: access containerized app
+    shell:
+      docker run -it -d -p 8080:80 dockerr</code></pre>
+	                        <pre><code>$ sudo systemctl status docker</code></pre>
+							<pre><code>$ sudo docker run hello-world</code></pre>
+							<h3>Task 6 - Add, commit and push it to your repository.</h3>
+							<pre><code>$ git status</code></pre>
+							<pre><code>$ git add</code></pre>
+							<pre><code>$ git commit -m "yourmessage"</code></pre>
+							<pre><code>$ git push origin main</code></pre>
+							<li><a href="https://drive.google.com/file/d/1VZjIchLBrW2tqSRoTlp-A0FDgomziglm/view?usp=share_link" class="button primary">Hands-On Activity 11</a></li>
+							<br> </br>
+							<li><a href="https://github.com/twinklegenon/CPE232_HOA11_Genon" class="button primary">Visit Github link Hands-On Activity 11</a></li>
+					
+						</article>	
+
+						<!-- Hands-On-Activity-12 -->
+						<article id="hoa12">
+							<h2 class="major">Build a Sample Web App</h2>
+							<h2 class="major">in a Docker Container</h2>
+							<span class="image main"><img src="images/pic19.png" alt="" /></span>
+							<h3 class="major">Objectives:</h3>
+							<p>Part 1: Launch the DEVASC VM </p>
+							<p> Part 2: Create a Simple Bash Script</p>
+							<p> Part 3: Create a Sample Web App </p>
+							<p> Part 4: Configure the Web App to Use Website File </p>
+							<p> Part 5: Create a Bash Script to Build and Run a Docker Container </p>
+							<p> Part 6: Build, Run, and Verify the Docker Container </p>
+							<h3 class="major">Steps: </h3>
+
+							<li><a href="https://drive.google.com/file/d/1cPam9-Ji_Q8bYtxTNqk1MpqMYhjZDGA8/view?usp=share_link" class="button primary">Hands-On Activity 12</a></li>
+							<br> </br>
+							<li><a href="https://github.com/twinklegenon/CPE232_HOA12_Genon" class="button primary">Visit Github link Hands-On Activity 12</a></li>
+						</article>	
+
+
+						<!-- Hands-On-Activity-13 -->
+						<article id="hoa13">
+							<h2 class="major"> OpenStack Prerequisite</h2>
+							<h2 class="major">Installation</h2>
+							
+							<h3 class="major">Objectives:</h3>
+							<p> Create a workflow to install OpenStack using Ansible as your Infrastructure as Code
+								(IaC) </p>
+							<h3 class="major">Steps: </h3>
+							<h3>Task 1 - Create a new repository for this activity and clone the repository to the Git </h3>
+							<p>Create a new repository and all the needed files inside the directories</p>
+							<pre><code>$ git clone <i>link</i></code></pre>
+							<pre><code>$ mkdir <i>directoryname</i> </code></pre>
+							<pre><code>$ touch main.yml</code></pre>
+
+							<h3>ansible.cfg</h3>
+                            <pre><code>[defaults]
+
+inventory = inventory
+host_key_checking = False
+
+deprecation_warnings = False
+
+
+remote_user = twinkle
+private_key_file = ~/.ssh/
+
+
+[defaults]
+
+inventory = inventory
+host_key_checking = False
+
+deprecation_warnings = False
+
+
+remote_user = twinkle
+private_key_file = ~/.ssh/</code></pre>
+							<h3>inventory</h3>
+                            <pre><code>[controller]
+#192.168.56.120
+#192.168.56.110
+#192.168.56.112
+192.168.56.125
+[compute]
+#192.168.56.120
+#192.168.56.110
+#192.168.56.112
+192.168.56.125</code></pre>
+                            <h3>openstack.yml</h3>
+                            <pre><code>---
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: update repository index (CentOS)
+    tags: always
+    dnf:
+      update_cache: yes
+    changed_when: false
+    when: ansible_distribution == "CentOS"
+
+  - name: update repository index (Ubuntu)
+    tags: always
+    apt:
+      update_cache: yes
+    changed_when: yes
+    when: ansible_distribution == "Ubuntu"
+
+- hosts: all
+  become: true
+  roles:
+   - ntp
+   - openstackpkg
+   - msgqueue
+   - sqldb
+   - memcached
+   - etcd</code></pre>
+
+							<h3>Task 2 - Create a playbook that converts the steps in the following items in: </h3>
+                            <p><b><a href="https://docs.openstack.org/install-guide/">https://docs.openstack.org/install-guide/</a></b></p>
+							<p>Click the following links to see the codes for every : </p>
+							
+							<h3 class="major"> <li><a href="https://github.com/twinklegenon/CPE232_HOA13_Genon/tree/main/roles/ntp/tasks" >NTP</a></li></h3>
+							<p><b>For verification, use the command:</b> <pre><code>$ chronyc sources</code></pre></p>
+							
+							<h3 class="major"> <li><a href="https://github.com/twinklegenon/CPE232_HOA13_Genon/tree/main/roles/openstackpkg/tasks" >OpenStack Packages</a></li></h3>
+						    <p><b>Note: Yoga repository is available by default in Ubuntu 22.04 LTS </b></p>
+							
+							<h3 class="major"> <li><a href="https://github.com/twinklegenon/CPE232_HOA13_Genon/tree/main/roles/sqldb/tasks" >SQL Database</a></li></h3> 
+							<p><b>For verification, use the command:</b> <pre><code>$ sudo systemctl status mariadb</code></pre></p>
+							
+							<h3 class="major"> <li><a href="https://github.com/twinklegenon/CPE232_HOA13_Genon/tree/main/roles/msgqueue/tasks" >Message Queue</a></li></h3> 
+							<p><b>For verification, use the command:</b> <pre><code>$ sudo systemctl status rabbitmq-server</code></pre></p>
+
+							<h3 class="major"> <li><a href="https://github.com/twinklegenon/CPE232_HOA13_Genon/tree/main/roles/memcached/tasks" >Memcached</a></li></h3>
+							<p><b>For verification, use the command:</b> <pre><code>$ sudo systemctl status memcached</code></pre></p>
+
+							<h3 class="major">  <li><a href="https://github.com/twinklegenon/CPE232_HOA13_Genon/tree/main/roles/etcd/tasks" >Etcd</a></li></h3>
+                            <p><b>For verification, use the command:</b> <pre><code>$ sudo systemctl status etcd</code></pre></p>
+
+							<h3>Task 3 - Create different plays in installing per server type (controller, compute
+								etc.) and identify it as a group in Inventory file.<h3>
+							<span class="image main"><img src="images/pic43.png" alt="" /></span>
+							<h3>Task 4 - Add, commit and push it to your GitHub repo.</h3>
+							<pre><code>$ git status</code></pre>
+							<pre><code>$ git add</code></pre>
+							<pre><code>$ git commit -m "yourmessage"</code></pre>
+							<pre><code>$ git push origin main</code></pre>
+							<li><a href="https://drive.google.com/file/d/1Jo24WJmYEEyhxX5YKsj4vTgiGb99lceS/view?usp=share_link" class="button primary">Hands-On Activity 13</a></li>
+							<br> </br>
+							<li><a href="https://github.com/twinklegenon/CPE232_HOA13_Genon" class="button primary">Visit Github link Hands-On Activity 13</a></li>
+					
+						</article>	
+
+						<!-- Hands-On-Activity-14 -->
+						<article id="hoa14">
+							<h2 class="major"> OpenStack Installation </h2>
+							<h2 class="major"> (Keystone, Glance, Nova)</h2>
+							<span class="image main"><img src="images/pic24.png" alt="" /></span>
+							<h3 class="major">Objectives:</h3>
+							<p> Create a workflow to install OpenStack using Ansible as your Infrastructure as Code
+								(IaC). </p>
+							<h3 class="major">Steps: </h3>
+							<h3>Task 1 - Create a new repository for this activity. </h3>
+                            <h3>Task 2 - Create a playbook that converts the steps in the following items in </h3>
+							<p><b><a href="https://docs.openstack.org/install-guide/"></a>https://docs.openstack.org/install-guide/</b></p>
+							<p>Click the following links to see the codes for every : </p>
+					        
+							<h3 class="major"> <li><a href="https://github.com/twinklegenon/CPE232_HOA14_Genon/tree/main/roles/keystone/tasks" >Keystone (Identity Service)</a></li></h3>
+							<p><b>For verification, use the command:</b> <pre><code>$ keystone-manage --help</code></pre> <pre><code>$ keystone-manage db_sync</code></pre></p>
+							
+							<h3 class="major"> <li><a href="https://github.com/twinklegenon/CPE232_HOA14_Genon/tree/main/roles/glance/tasks" >Glance (Imaging Service)</a></li></h3>
+							<p><b>For verification, use the command:</b> <pre><code>$ glance-manage --help</code></pre></p>
+
+							<h3 class="major"> <li><a href="https://github.com/twinklegenon/CPE232_HOA14_Genon/tree/main/roles/nova/tasks" >Nova (Compute Service)</a></li></h3>
+							<p><b>For verification, use the command:</b> <pre><code>$ nova-manage --help</code></pre></p>
+
+							<h3>Task 3 - Add, commit and push it to your GitHub repo.</h3>
+							<pre><code>$ git status</code></pre>
+							<pre><code>$ git add</code></pre>
+							<pre><code>$ git commit -m "yourmessage"</code></pre>
+							<pre><code>$ git push origin main</code></pre>
+							<li><a href="https://drive.google.com/file/d/1Pm-uLtI0pi-vMCdFXjjIRiGvpjX4g6In/view?usp=share_link" class="button primary">Hands-On Activity 14</a></li>
+							<br> </br>
+							<li><a href="https://github.com/twinklegenon/CPE232_HOA14_Genon" class="button primary">Visit Github link Hands-On Activity 14</a></li>
+						</article>	
+
+						<!-- Hands-On-Activity-15  -->
+						<article id="hoa15">
+							<h2 class="major"> OpenStack Installation</h2>
+							<h2 class="major"> (Neutron, Horizon, Cinder)</h2>
+							<span class="image main"><img src="images/pic23.png" alt="" /></span>
+							<h3 class="major">Objectives:</h3>
+							<p> Create a workflow to install OpenStack using Ansible as your Infrastructure as Code
+								(IaC). </p>
+							<h3 class="major">Steps: </h3>
+							<h3>Task 1 - Create a new repository for this activity. </h3>
+                            <h3>Task 2 - Create a playbook that converts the steps in the following items in </h3>
+							<p><b><a href="https://docs.openstack.org/install-guide/"></a>https://docs.openstack.org/install-guide/</b></p>
+							<p>Click the following links to see the codes for every : </p>
+					        
+							<h3 class="major"> <li><a href="https://github.com/twinklegenon/CPE232_HOA15_Genon/tree/main/roles/neutron/tasks" >Neutron</a></li></h3>
+							<p><b>For verification, use the command:</b> <pre><code>$ neutron-manage --help</code></pre> <pre><code>$ ping -c 4 controller </code></pre> <pre><code>$ keystone-manage db_sync</code></pre></p>
+							
+							<h3 class="major"> <li><a href="https://github.com/twinklegenon/CPE232_HOA15_Genon/tree/main/roles/horizon/tasks" >Horizon</a></li></h3>
+							<p><b>For verification, use the command:</b> <pre><code>$ systemctl status apache2 nova-api</code></pre></p>
+
+							<h3 class="major"> <li><a href="https://github.com/twinklegenon/CPE232_HOA15_Genon/tree/main/roles/cinder/tasks" >Cinder</a></li></h3>
+							<p><b>For verification, use the command:</b> <pre><code>$ cinder db sync</code></pre></p>
+
+							<h3>Task 3 - Add, commit and push it to your GitHub repo.</h3>
+							<pre><code>$ git status</code></pre>
+							<pre><code>$ git add</code></pre>
+							<pre><code>$ git commit -m "yourmessage"</code></pre>
+							<pre><code>$ git push origin main</code></pre>
+							<li><a href="https://drive.google.com/file/d/1qUNcWJywdMFuJ1SPlRHZctYib4zJ3Sp3/view?usp=share_link" class="button primary">Hands-On Activity 15</a></li>
+							<br> </br>
+							<li><a href="https://github.com/twinklegenon/CPE232_HOA15_Genon" class="button primary">Visit Github link Hands-On Activity 15</a></li>
+							
+						</article>	
+
+						<!-- Final Examination -->
+						<article id="final">
+							<h2 class="major">Final Skills Examination</h2>
+							<span class="image main"><img src="images/pic25.png" alt="" /></span>
+							<h4> Task 1 - Create a repository and Label it Final_Exam_Surname. </h4>
+                            
+							<h4>Task 2 - Clone your new repository in your VM:</h4>
+							<pre><code>$ git clone </code></pre>
+							<h4>Task 3 - Create an Ansible playbook that does the following with an input of a config.yaml file and structure
+								inventory file.</h4>
+							<h3>inventory</h3>
+							<pre><code>[my_servers]
+192.168.56.120 
+192.168.56.125</code></pre>
+                            <h3>ansible.cfg</h3>
+							<pre><code>[defaults]
+
+inventory = inventory
+host_key_checking = False
+
+deprecation_warnings = False
+
+
+remote_user = twinkle
+private_key_file = ~/.ssh/</code></pre>
+                            <h3>config.yaml</h3>
+							<pre><code>---
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: update repository index (CentOS)
+    tags: always
+    dnf:
+      update_cache: yes
+    changed_when: false
+    when: ansible_distribution == "CentOS"
+
+  - name: update repository index (Ubuntu)
+    tags: always
+    apt:
+      update_cache: yes
+    changed_when: yes
+    when: ansible_distribution == "Ubuntu"
+
+  - name: changing the motd on Ubuntu
+    shell: sudo sh -c 'echo "Ansible Managed by Twinkle" > /etc/motd'
+    when: ansible_distribution == "Ubuntu"
+
+  - name: changing the motd on CentOS
+    shell: sudo sh -c 'echo "Ansible Managed by Twinkle" > /etc/motd'
+    when: ansible_distribution == "CentOS"
+
+- hosts: my_servers
+  become: true
+  roles:
+    - nagios
+    - apache</code></pre>
+							<h4>Task 3.1 - Install and configure one enterprise service that can be installed in Debian and Centos servers</h4>
+							<a href="https://github.com/twinklegenon/Final_Exam_Genon/tree/main/roles/apache/tasks" >Click Here for the Codes</a>
+							<p><b>For Verification use the command: <pre><code>sudo systemctl status mariadb </code></pre></b></p>
+							<span class="image main"><img src="images/pic44.png" alt="" /></span>
+
+							<h4>Task 3.2 - Install and configure one monitoring tool that can be installed in Debian and Centos servers (if it is a
+								stack there should be option of different host)</h4>
+							<a href="https://github.com/twinklegenon/Final_Exam_Genon/tree/main/roles/nagios/tasks" >Click Here for the Codes</a>
+                            <p><b>Verification using the web browser:</b></p>
+                            <span class="image main"><img src="images/pic45.png" alt="" /></span>
+
+							<h4>Task 4.4 - Change Motd as "Ansible Managed by (username)"</h4>
+                            <pre><code>  - name: changing the motd on Ubuntu
+    shell: sudo sh -c 'echo "Ansible Managed by Twinkle" > /etc/motd'
+    when: ansible_distribution == "Ubuntu"
+
+  - name: changing the motd on CentOS
+    shell: sudo sh -c 'echo "Ansible Managed by Twinkle" > /etc/motd'
+    when: ansible_distribution == "CentOS"</code></pre>
+							<h4>Task 5 - Push and commit your files in Github</h4>
+							<pre><code>$ git status</code></pre>
+							<pre><code>$ git add</code></pre>
+							<pre><code>$ git commit -m "yourmessage"</code></pre>
+							<pre><code>$ git push origin main</code></pre>
+
+							<p>Task 5 - Make sure to show evidence of input (codes) process (codes successfully running) and output
+								(evidence of installation). Create a word document report for this final exam. For your final exam to be
+								counted, please paste your repository link as an answer in your report. No point will be given if you forgot
+								to paste your repo link.</p>
+							
+							<p>Note: Extra points if you will implement the said services via containerization.</p>
+														
+							<li><a href="https://drive.google.com/file/d/1M4b-VJwulwLm808oeCdJ2VimAhwDoXkA/view?usp=share_link" class="button primary">Visit Final Exam</a></li>
+							<br> </br>
+							<li><a href="https://github.com/twinklegenon/Final_Exam_Genon" class="button primary">Visit Github link for Final Exam</a></li>
+						</article>	
+
+                        <!-- Reflections & Learnings -->
+						<article id="ref">
+							<h2 class="major">Reflections and Learnings</h2>
+							<span class="image main"><img src="images/pic46.png" alt="" /></span>
+							<p>All througought the course CPE 232 - Managing Enterprise Servers, I have learned the concept of DevOps Culture and its benefits rather than traditional Silos in module 1. In DevOps culture, there is no downtime or delay in development and operation.  The problem solved by DevOps is when the development team waits for the operation team for the testing and feeback that takes time to finish the software. The Phase of Devops are Plan, Code, Build, Test, Deploy, Operate, Monitor and Integrate. Here, we used <code>Git</code> which is famous local tool for collaboration while Github is for online collaboration. I learned how to used various git commands such as <code>git status, git add, git commit, git pull, and git push</code>. Companies such as Amazon, Netflix, Walmart, Facebook, AutoCAD. The Netflix (Simian Army) made a bug that fixes the problem in the system which is used on their bug testing. </p>
+							<p>In module 2, I learned about <code>SSH - Secure Shell</code> which is mostly used in Linux systems. The commands between the SSH client and SSH server are sent through and encrypted SSH and it uses port 22. It runs a software called SSH daemon. SSH uses <code>cryptographic keys</code> <code>Public and Private Key</code>. The keys are hidden at <code>~/.ssh/authorized_keys</code>, the public key that we always used is stored on the file named <code>authorized_keys</code>. To generate an SSH key pair, enter the command <code>ssh-keygen</code>. When copying the Public SSH key we used the command: <code>ssh-copy-id username@ipaddress</code>. To test if you can SSH into a remote server we used the command <code>ssh username@ipaddress</code>. In module 3, we installed another Linix distribution under Red Hat Enterprise which is the CentOS. We also installed and configure SSH into CentOS so we can have two kinds of Linux distributions which are the Ubuntu and CentOS. </p>
+							<p>We tackled about Ansible in module 4 which is a useful IT automation tool for managing servers. <code>Ansible</code> is used to configure system and deploy softwares or applications. It advances IT tasks such as continuous deployments or zero downtime rolling updates. In simple words, ansible environment automates the management of remote servers through SSH and it controls the desired state for the servers. While in Module 5,6 and 7, I learned abou creating roles in Ansible. It makes the job easy since you can install and configure packages on the chosen or specified role you have designed. </p>
+							<p>We are introduced and got familiarized with Availability Monitorng tools such as <code>Nagios</code>, Manage Performance Monitoring tools such as <code>Prometheus</code>, and how to Manage Log Monitoring tools such as <code>Elastic Stack (Elastic Search, Logstash and Kibana)</code>. <code>Nagios</code> is used to monitor the network for problems caused by overloaded links or network connections. as well as monitoring routers, switches and more. The <code>Prometheus</code> is a free software application used for event monitoring and alerting. It records real-time metrics in a time series database built using a HTTP pull model, with flexible and real-time alerting. Lastly, the <code>Elastic Stack</code> which contains the <code>Elastic Search, Logstash, and Kibana (ELK)</code>. The ELK is a combination or group of open source products from Elastic designed to help users take data from any type of souce and in any format, and search, analyze and visualize that collected data in real time.</p>
+						    <p>The <code>Docker</code> that was discussed in Module 11 and 12 is a platform designed to help developers build, share, and run modern applications. <code>Docker</code> is an open source containerization platform. It enables the developers to package applications into containers. In module 13, 14, and 15 we talked about <code>OpenStack</code> which is an open source cloud computing infrastructure software project that uses pooled virtual resources to build and manage private and public clouds. The Openstack has two purposes which is the <code>Abstraction-Virtualization</code> and <code>Orchestration - Giving back the resources if not needed</code>. The <code>OpenStack</code> solved the problem with <code>AWS-EC2  - the first cloud service</code> regarding with the <code>IT capacity</code> depending on the low and peak season. </p>
+							<p>In my end, I learned the concept of managing servers from Installing Linux distributions which are the Ubuntu and CentOS to having an SSH connection between SSH client and Client Server. I also learned an important tool which is the Ansible that can manage several servers and can be used to install and configure various packages on remote servers without having physical or direct access. After that, we learned about docker that is focused on containerization that can be used to build, test, and deploy application immediately. Lastly, I learned about OpenStack that famous because it is a cloud computing service that solves the demand on IT capacity.
+								<h3>Acknowledgment</h3><p>I would like to say thank you to my professor and classmates which helps me to be introduced, familiarized, troubleshoot, and learn all the lessons in this course CPE232 - Managing Enterprise Servers. </p>
+	
+						</article>
+
+                        <!-- About Me -->
+						<article id="about">
+							<h2 class="major">About Me</h2>
+							<span class="image main"><img src="images/pic05.jpg" alt="" /></span>
+							<h4>Hello, I am Twinkle S. Genon</h4>
+							<p> I'm a third year student at Technological Institute of the Philippines currently taking System Administration track as my elective. I took Science, Technology, Engineering, and Mathematics (STEM) as my track on Senior High School. With this course CPE 232 - Managing Enterprise Servers I was able to showcase my research oriented skills, analytical and critical thinking skills by encountering and solving problems and errors on every given activities. I also practiced the time management and flexibility to manage the given activities, with that I am able to work under pressure.  </p>
+						    
+						</article>
+
+						<!-- Contact -->
+							<article id="contact">
+								<h2 class="major">Contact Me</h2>
+								<ul class="icons">
+									<li><a href="https://twitter.com/twinksgenon" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="https://www.facebook.com/twinkssgenon/" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+									<li><a href="https://www.instagram.com/twinksgenon/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="https://github.com/twinklegenon" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+									<li><a href="https://www.linkedin.com/in/twinkle-g-88158318a/" class="icon brands fa-linkedin"><span class="label">Linkedin</span></a></li>
+								</ul>
+							</article>
+
+						<!-- Elements -->
+							<article id="elements">
+								<h2 class="major">Elements</h2>
+
+								<section>
+									<h3 class="major">Text</h3>
+									<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
+									This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
+									This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>
+									<hr />
+									<h2>Heading Level 2</h2>
+									<h3>Heading Level 3</h3>
+									<h4>Heading Level 4</h4>
+									<h5>Heading Level 5</h5>
+									<h6>Heading Level 6</h6>
+									<hr />
+									<h4>Blockquote</h4>
+									<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
+									<h4>Preformatted</h4>
+									<pre><code>i = 0;
+
+while (!deck.isInOrder()) {
+    print 'Iteration ' + i;
+    deck.shuffle();
+    i++;
+}
+
+print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
+								</section>
+
+								<section>
+									<h3 class="major">Lists</h3>
+
+									<h4>Unordered</h4>
+									<ul>
+										<li>Dolor pulvinar etiam.</li>
+										<li>Sagittis adipiscing.</li>
+										<li>Felis enim feugiat.</li>
+									</ul>
+
+									<h4>Alternate</h4>
+									<ul class="alt">
+										<li>Dolor pulvinar etiam.</li>
+										<li>Sagittis adipiscing.</li>
+										<li>Felis enim feugiat.</li>
+									</ul>
+
+									<h4>Ordered</h4>
+									<ol>
+										<li>Dolor pulvinar etiam.</li>
+										<li>Etiam vel felis viverra.</li>
+										<li>Felis enim feugiat.</li>
+										<li>Dolor pulvinar etiam.</li>
+										<li>Etiam vel felis lorem.</li>
+										<li>Felis enim et feugiat.</li>
+									</ol>
+									<h4>Icons</h4>
+									<ul class="icons">
+										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+									</ul>
+
+									<h4>Actions</h4>
+									<ul class="actions">
+										<li><a href="#" class="button primary">Default</a></li>
+										<li><a href="#" class="button">Default</a></li>
+									</ul>
+									<ul class="actions stacked">
+										<li><a href="#" class="button primary">Default</a></li>
+										<li><a href="#" class="button">Default</a></li>
+									</ul>
+								</section>
+
+								<section>
+									<h3 class="major">Table</h3>
+									<h4>Default</h4>
+									<div class="table-wrapper">
+										<table>
+											<thead>
+												<tr>
+													<th>Name</th>
+													<th>Description</th>
+													<th>Price</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Item One</td>
+													<td>Ante turpis integer aliquet porttitor.</td>
+													<td>29.99</td>
+												</tr>
+												<tr>
+													<td>Item Two</td>
+													<td>Vis ac commodo adipiscing arcu aliquet.</td>
+													<td>19.99</td>
+												</tr>
+												<tr>
+													<td>Item Three</td>
+													<td> Morbi faucibus arcu accumsan lorem.</td>
+													<td>29.99</td>
+												</tr>
+												<tr>
+													<td>Item Four</td>
+													<td>Vitae integer tempus condimentum.</td>
+													<td>19.99</td>
+												</tr>
+												<tr>
+													<td>Item Five</td>
+													<td>Ante turpis integer aliquet porttitor.</td>
+													<td>29.99</td>
+												</tr>
+											</tbody>
+											<tfoot>
+												<tr>
+													<td colspan="2"></td>
+													<td>100.00</td>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+
+									<h4>Alternate</h4>
+									<div class="table-wrapper">
+										<table class="alt">
+											<thead>
+												<tr>
+													<th>Name</th>
+													<th>Description</th>
+													<th>Price</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Item One</td>
+													<td>Ante turpis integer aliquet porttitor.</td>
+													<td>29.99</td>
+												</tr>
+												<tr>
+													<td>Item Two</td>
+													<td>Vis ac commodo adipiscing arcu aliquet.</td>
+													<td>19.99</td>
+												</tr>
+												<tr>
+													<td>Item Three</td>
+													<td> Morbi faucibus arcu accumsan lorem.</td>
+													<td>29.99</td>
+												</tr>
+												<tr>
+													<td>Item Four</td>
+													<td>Vitae integer tempus condimentum.</td>
+													<td>19.99</td>
+												</tr>
+												<tr>
+													<td>Item Five</td>
+													<td>Ante turpis integer aliquet porttitor.</td>
+													<td>29.99</td>
+												</tr>
+											</tbody>
+											<tfoot>
+												<tr>
+													<td colspan="2"></td>
+													<td>100.00</td>
+												</tr>
+											</tfoot>
+										</table>
+									</div>
+								</section>
+
+								<section>
+									<h3 class="major">Buttons</h3>
+									<ul class="actions">
+										<li><a href="#" class="button primary">Primary</a></li>
+										<li><a href="#" class="button">Default</a></li>
+									</ul>
+									<ul class="actions">
+										<li><a href="#" class="button">Default</a></li>
+										<li><a href="#" class="button small">Small</a></li>
+									</ul>
+									<ul class="actions">
+										<li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
+										<li><a href="#" class="button icon solid fa-download">Icon</a></li>
+									</ul>
+									<ul class="actions">
+										<li><span class="button primary disabled">Disabled</span></li>
+										<li><span class="button disabled">Disabled</span></li>
+									</ul>
+								</section>
+
+								<section>
+									<h3 class="major">Form</h3>
+									<form method="post" action="#">
+										<div class="fields">
+											<div class="field half">
+												<label for="demo-name">Name</label>
+												<input type="text" name="demo-name" id="demo-name" value="" placeholder="Jane Doe" />
+											</div>
+											<div class="field half">
+												<label for="demo-email">Email</label>
+												<input type="email" name="demo-email" id="demo-email" value="" placeholder="jane@untitled.tld" />
+											</div>
+											<div class="field">
+												<label for="demo-category">Category</label>
+												<select name="demo-category" id="demo-category">
+													<option value="">-</option>
+													<option value="1">Manufacturing</option>
+													<option value="1">Shipping</option>
+													<option value="1">Administration</option>
+													<option value="1">Human Resources</option>
+												</select>
+											</div>
+											<div class="field half">
+												<input type="radio" id="demo-priority-low" name="demo-priority" checked>
+												<label for="demo-priority-low">Low</label>
+											</div>
+											<div class="field half">
+												<input type="radio" id="demo-priority-high" name="demo-priority">
+												<label for="demo-priority-high">High</label>
+											</div>
+											<div class="field half">
+												<input type="checkbox" id="demo-copy" name="demo-copy">
+												<label for="demo-copy">Email me a copy</label>
+											</div>
+											<div class="field half">
+												<input type="checkbox" id="demo-human" name="demo-human" checked>
+												<label for="demo-human">Not a robot</label>
+											</div>
+											<div class="field">
+												<label for="demo-message">Message</label>
+												<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
+											</div>
+										</div>
+										<ul class="actions">
+											<li><input type="submit" value="Send Message" class="primary" /></li>
+											<li><input type="reset" value="Reset" /></li>
+										</ul>
+									</form>
+								</section>
+
+							</article>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+					</footer>
+
+			</div>
+
+		<!-- BG -->
+			<div id="bg"></div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
